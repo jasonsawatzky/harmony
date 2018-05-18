@@ -35,6 +35,9 @@ export default () => (
 				<NavItem componentClass={Link} eventKey={5} to='#' href='#' className='navItem'>
 					Login
 				</NavItem>
+				<NavItem componentClass={Link} eventKey={6} to='/status' href='/status' className='navItem'>
+					API Status
+				</NavItem>
 			</Nav>
 		</Navbar.Collapse>
 	</Navbar>

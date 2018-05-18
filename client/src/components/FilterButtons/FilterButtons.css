@@ -1,6 +1,6 @@
 .filterButton {
 	background-color: white;
-	width: calc((100% - 6px) / 3);
+	width: calc(100% / 3);
 	height: 100%;
 	display: inline-block;
 	border: 1px solid black;
