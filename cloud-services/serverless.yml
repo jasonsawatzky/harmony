@@ -17,3 +17,33 @@ functions:
       - http:
           method: get
           path: status
+  addUser:
+    handler: UserService.create
+    events:
+      - http:
+          method: post
+          path: users
+  listUsers:
+    handler: UserService.list
+    events:
+      - http:
+          method: get
+          path: users
+resources:
+  Resources:
+    Berries:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Delete
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.USER_TABLE_NAME}
