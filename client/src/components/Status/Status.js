@@ -5,9 +5,13 @@ export default class Status extends Component {
 	state = { status : '' }
 
 	getStatus = () => {
-		axios.get('localhost:3000/status')
-			.then(response => this.setState({ status : response }))
-			.catch(error => this.setState({ status : error }))
+		axios.get('http://localhost:3000/status')
+			.then(response => this.setState({status : response.data}))
+			.catch(error => console.log(error))
+	}
+
+	componentDidMount = () => {
+		this.getStatus()
 	}
 
 	render = () => (
