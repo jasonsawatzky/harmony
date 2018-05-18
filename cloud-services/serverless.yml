@@ -1,0 +1,19 @@
+service: harmony
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  environment:
+    USER_TABLE_NAME: ${self:service}-${opt:stage, self:provider.stage}-User
+
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
+
+functions:
+  status:
+    handler: status.status
+    events:
+      - http:
+          method: get
+          path: status
