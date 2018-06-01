@@ -1,7 +1,7 @@
 const dynamodb = require('serverless-dynamodb-client');
 const UserDAO = require('./dao/UserDAO.js');
 const dao = new UserDAO(dynamodb, process.env.USER_TABLE_NAME);
-const resourceName = "User";
+const resourceName = 'User';
 
 module.exports.create = (event, context, callback) => {
   const resource = JSON.parse(event.body);
@@ -20,9 +20,9 @@ module.exports.create = (event, context, callback) => {
       // Build a response
       const response = {
         headers: {
-          "Content-Type": "text/html",
-          "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
-          "Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS
+          'Content-Type': 'text/html',
+          'Access-Control-Allow-Origin' : '*', // Required for CORS support to work
+          'Access-Control-Allow-Credentials' : true // Required for cookies, authorization headers with HTTPS
         },
         statusCode: 200,
         body: JSON.stringify(result.Item),
@@ -50,9 +50,9 @@ module.exports.read = (event, context, callback) => {
       const response = {
         statusCode: 200,
         headers: {
-            "Content-Type": "application/javascript",
-            "Access-Control-Allow-Origin" : "*", // Enable CORS
-            "Access-Control-Allow-Credentials" : true // Allow credentials
+            'Content-Type': 'application/javascript',
+            'Access-Control-Allow-Origin' : '*', // Enable CORS
+            'Access-Control-Allow-Credentials' : true // Allow credentials
         },
         body: JSON.stringify(result.Item),
       };
@@ -77,9 +77,9 @@ module.exports.list = (event, context, callback) => {
       const response = {
         statusCode: 200,
         headers: {
-            "Content-Type": "application/javascript",
-            "Access-Control-Allow-Origin" : "*", // Enable CORS
-            "Access-Control-Allow-Credentials" : true // Allow credentials
+            'Content-Type': 'application/javascript',
+            'Access-Control-Allow-Origin' : '*', // Enable CORS
+            'Access-Control-Allow-Credentials' : true // Allow credentials
         },
         body: JSON.stringify(result.Items),
       };

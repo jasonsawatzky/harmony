@@ -1,44 +1,52 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap'
+import { AppBar, Toolbar, IconButton, Typography, Button } from '@material-ui/core'
+import { Menu as MenuIcon } from '@material-ui/icons'
+import { withStyles } from '@material-ui/core/styles'
 
 import './Navbar.css'
 
-export default () => (
-	<Navbar inverse collapseOnSelect>
-		<Navbar.Header>
-			<Navbar.Brand>
-				<Link to='/'>React-Redux App</Link>
-			</Navbar.Brand>
-			<Navbar.Toggle />
-		</Navbar.Header>
-		<Navbar.Collapse>
-			<Nav>
-				<NavItem eventKey={1} className='navItem'>
-					About
-				</NavItem>
-				<NavItem eventKey={2} className='navItem'>
-					Privacy Policy
-				</NavItem>
-				<NavDropdown eventKey={3} title='Dropdown' id='basic-nav-dropdown'>
-					<MenuItem eventKey={3.1}>Action</MenuItem>
-					<MenuItem eventKey={3.2}>Another action</MenuItem>
-					<MenuItem eventKey={3.3}>Something else here</MenuItem>
-					<MenuItem divider />
-					<MenuItem eventKey={3.3}>Separated link</MenuItem>
-				</NavDropdown>
-			</Nav>
-			<Nav pullRight>
-				<NavItem componentClass={Link} eventKey={4} to='/todoList' href='/todoList' className='navItem'>
-					Todo List
-				</NavItem>
-				<NavItem componentClass={Link} eventKey={5} to='#' href='#' className='navItem'>
-					Login
-				</NavItem>
-				<NavItem componentClass={Link} eventKey={6} to='/status' href='/status' className='navItem'>
-					API Status
-				</NavItem>
-			</Nav>
-		</Navbar.Collapse>
-	</Navbar>
+const styles = {
+	root: {
+		flexGrow: 1,
+	},
+	brand: {
+		flex: 1,
+		textDecoration: 'none',
+		marginLeft: 'calc(50% - 68px)',
+		position: 'absolute',
+		justifyContent: 'space-between'
+	},
+	menuButton: {
+		marginLeft: -12,
+		marginRight: 20,
+	},
+	floatRight: {
+		float: 'right',
+		flex: 1,
+	}
+}
+
+const Component = ({ classes }) => (
+	<div className={classes.root}>
+		<AppBar position='static'>
+			<Toolbar>
+			<IconButton className={classes.menuButton} color='inherit' aria-label='Menu'>
+				<MenuIcon />
+			</IconButton>
+			<Button component={Link} color='inherit' to='/about'>About</Button>
+			<Button component={Link} color='inherit' to='/privacyPolicy'>Privacy Policy</Button>
+			<Button component={Link} color='inherit' to='/landing'>Landing</Button>
+			<Typography variant='title' color='inherit' className={classes.brand} component={Link} to='/'>
+				Harmony
+			</Typography>
+			<div className={classes.floatRight}>
+				<Button component={Link} color='inherit' to='/register' className={classes.floatRight}>Register</Button>
+				<Button component={Link} color='inherit' to='/login' className={classes.floatRight}>Login</Button>
+			</div>
+			</Toolbar>
+		</AppBar>
+	</div>
 )
+
+export default withStyles(styles)(Component)

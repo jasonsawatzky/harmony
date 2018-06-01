@@ -6,7 +6,7 @@ module.exports.status = (event, context, callback) => {
     headers: {
       'Content-Type': 'text/html',
     },
-    body: "harmony-api is up!\n",
+    body: 'harmony-api is up!\n',
   };
 
   callback(null, response);
