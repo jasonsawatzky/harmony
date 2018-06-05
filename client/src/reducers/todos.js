@@ -3,8 +3,7 @@ import { Actions } from '../actions';
 const initialTodos = [
 	{ id: 0, text: 'do the dishes', completed: false },
 	{ id: 1, text: 'take out the trash', completed: true },
-	{ id: 3, text: 'mow the lawn', completed: false },
-	{ id: 4, text: 'this is a really really long line of text that should be wrapped and split into 2 separate lines in the todo list this is a really really long line of text that should be wrapped and split into 2 separate lines in the todo list this is a really really long line of text that should be wrapped and split into 2 separate lines in the todo list', completed: false }
+	{ id: 3, text: 'mow the lawn', completed: false }
 ]
 
 export const initialTodoId = initialTodos.reduce((x, y) => (

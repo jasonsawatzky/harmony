@@ -1,6 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Drawer, List, Divider, Button } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
+import PropTypes from 'prop-types'
 
 const styles = {
 	list: {
@@ -12,6 +14,11 @@ const styles = {
 }
 
 class TemporaryDrawer extends React.Component {
+
+	static propTypes = {
+		classes: PropTypes.object.isRequired
+	}
+
 	state = {
 		top: false,
 		left: false,
@@ -20,28 +27,32 @@ class TemporaryDrawer extends React.Component {
 	}
 
 	toggleDrawer = (side, open) => () => {
-		this.setState({
-			[side]: open,
-		})
+		this.setState({ [side]: open })
 	}
 
 	render() {
 		const { classes } = this.props
-		const sideList = (
+		const sideList =
 			<div className={classes.list}>
-				<List>{[1]}</List>
+				<List>{[<Link key='0' to='/landing'>About</Link>]}</List>
 				<Divider />
 				<List>{[2]}</List>
 			</div>
-		)
 
 
 		return (
 			<div>
-				<Button variant='raised' color='primary' onClick={this.toggleDrawer('left', true)}>
+				<Button
+					variant='raised'
+					color='primary'
+					onClick={this.toggleDrawer('left', true)}
+				>
 					Open Filters
 				</Button>
-				<Drawer open={this.state.left} onClose={this.toggleDrawer('left', false)}>
+				<Drawer
+					open={this.state.left}
+					onClose={this.toggleDrawer('left', false)}
+				>
 					<div
 						tabIndex={0}
 						role="button"
