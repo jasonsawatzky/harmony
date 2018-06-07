@@ -1,6 +1,7 @@
 const express = require('express')
 const expressGraphql = require('express-graphql')
 const { buildSchema } = require('graphql')
+const mongoose = require('mongoose')
 
 const schema = buildSchema(`
 	type Query {
@@ -11,7 +12,18 @@ const schema = buildSchema(`
             url: String,
             author: String,
             description: String): [Course]
-	},
+    },
+    input CourseInput {
+        id: Int
+		title: String
+        author: String
+        description: String
+        topic: String
+        url: String
+    }
+    type Mutation {
+        createCourse(course: CourseInput): Course
+    },
 	type Course {
 		id: Int
 		title: String
@@ -22,40 +34,27 @@ const schema = buildSchema(`
 	}
 `)
 
-const courseData = [
-	{
-        id: 1,
-        title: 'The Complete Node.js Developer Course',
-        author: 'Andrew Mead, Rob Percival',
-        description: 'Learn Node.js by building real-world applications with Node, Express, MongoDB, Mocha, and more!',
-        topic: 'Node.js',
-        url: 'https://codingthesmartway.com/courses/nodejs/'
-    },
-    {
-        id: 2,
-        title: 'Node.js, Express & MongoDB Dev to Deployment',
-        author: 'Brad Traversy',
-        description: 'Learn by example building & deploying real-world Node.js applications from absolute scratch',
-        topic: 'Node.js',
-        url: 'https://codingthesmartway.com/courses/nodejs-express-mongodb/'
-    },
-    {
-        id: 3,
-        title: 'JavaScript: Understanding The Weird Parts',
-        author: 'Anthony Alicea',
-        description: 'An advanced JavaScript course for everyone! Scope, closures, prototypes, this, build your own framework, and more.',
-        topic: 'JavaScript',
-        url: 'https://codingthesmartway.com/courses/understand-javascript/'
-    }
-]
+mongoose.connect('mongodb://localhost/Harmony')
+	.then(() => console.log('Connected to database.'))
+	.catch(err => console.error('Error connecting to database.'))
+
+const Course = mongoose.model('course', mongoose.Schema({
+	id: Number,
+	title: String,
+	author: String,
+	description: String,
+	topic: String,
+	url: String
+}))
+
+// const courses = Course
+//     .find({ topic: 'Node.js', author: 'Brad Traversy' })
+//     .exec((err, result) => !err && console.log(result))
 
 const rootValue = {
-    course: args => courseData.find(course => course.id === args.id),
-    courses: args => courseData.filter(course =>
-        Object.keys(args).every(key =>
-            course[key] === args[key]
-        )
-    )
+    course: args => Course.findOne({ id: args.id }),
+    courses: args => Course.find(args),
+    createCourse: args => Course.create(args.course)
 }
 
 const app = express()
