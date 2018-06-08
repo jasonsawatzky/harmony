@@ -63,7 +63,9 @@ const styles = theme => ({
 	bottomNavButton: {
 		minWidth: '30px',
 		padding: '0',
-		font: '400 10px system-ui'
+		font: '400 10px system-ui',
+		backgroundColor: 'lightGray',
+		color: theme.palette.secondary.main
 	}
 })
 
@@ -104,8 +106,8 @@ class CategoryMenu extends React.Component {
 			<Tabs
 				value={this.state.value}
 				onChange={(event, value) => this.setState({ value })}
-				indicatorColor='primary'
-				textColor='primary'
+				indicatorColor='secondary'
+				textColor='secondary'
 				centered
 			>
 				{tabNames.map((tabName, index) =>
@@ -114,7 +116,7 @@ class CategoryMenu extends React.Component {
 							this.state.notifications[index]
 							? <Badge
 								badgeContent={this.state.notifications[index]}
-								color='secondary'
+								color='seondary'
 								className={classes.padding}
 							>
 								{tabName}

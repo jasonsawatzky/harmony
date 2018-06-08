@@ -1,0 +1,1 @@
+export const cognitoClientId = '15cs6b84gu1tvp2ctu69kqncft'

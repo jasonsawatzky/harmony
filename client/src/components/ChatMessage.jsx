@@ -5,21 +5,19 @@ import PropTypes from 'prop-types'
 
 const styles = theme => ({
 	chatBubbleRight: {
-		backgroundColor: theme.palette.secondary.light,
+		backgroundColor: theme.palette.secondary.main,
 		borderRadius: '20px',
-		padding: '8px',
-		color: theme.palette.secondary.contrastText
+		padding: '8px'
 	},
 	chatBubbleLeft: {
-		backgroundColor: theme.palette.secondary.dark,
+		backgroundColor: theme.palette.primary.main,
 		borderRadius: '20px',
-		padding: '8px',
-		color: theme.palette.secondary.contrastText
+		padding: '8px'
 	},
 	chatPointerRight: {
 		height: 0,
 		width: 0,
-		borderLeft: '30px solid ' + theme.palette.secondary.light,
+		borderLeft: '30px solid ' + theme.palette.secondary.main,
 		borderRight: '10px solid transparent',
 		borderBottom: '3px solid transparent',
 		borderTop: '10px solid transparent',
@@ -29,7 +27,7 @@ const styles = theme => ({
 	chatPointerLeft: {
 		height: 0,
 		width: 0,
-		borderRight: '30px solid ' + theme.palette.secondary.dark,
+		borderRight: '30px solid ' + theme.palette.primary.main,
 		borderLeft: '10px solid transparent',
 		borderBottom: '3px solid transparent',
 		borderTop: '10px solid transparent',

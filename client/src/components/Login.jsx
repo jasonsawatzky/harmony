@@ -3,6 +3,9 @@ import { withStyles } from '@material-ui/core/styles'
 import { AccountCircle, Lock } from '@material-ui/icons'
 import PropTypes from 'prop-types'
 
+import urls from '../constants/urls'
+import { cognitoClientId } from '../constants'
+
 import {
 	TextField,
 	Button,
@@ -109,8 +112,9 @@ class Component extends React.Component {
 										variant='raised'
 										color='primary'
 										className={classes.button}
+										onClick={() => window.location.href = `${urls.cognito}/login?response_type=code&client_id=${cognitoClientId}&redirect_uri=localhost:3001`}
 									>
-										Login
+										<a href='https://harmony.auth.us-west-2.amazoncognito.com/login?response_type=code&client_id=15cs6b84gu1tvp2ctu69kqncft&redirect_uri=localhost:3001/login'>Login</a>
 									</Button>
 								</Grid>
 							</Grid>
