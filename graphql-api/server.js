@@ -1,8 +1,26 @@
+const { mergeSchemas } = require('graphql-tools')
 const express = require('express')
 const { graphqlExpress, graphiqlExpress } = require('apollo-server-express')
 const bodyParser = require('body-parser')
 
-const { schema } = require('./Course')
+
+// TODO: extract logic to merge schemas into separate file
+const { schema: courseSchema, resolvers: courseResolvers } = require('./Course')
+const { schema: userSchema, resolvers: userResolvers } = require('./User')
+
+const schema = mergeSchemas({
+    schemas: [courseSchema, userSchema],
+    resolvers: {
+        Query: {
+            ...courseResolvers.Query,
+            ...userResolvers.Query
+        },
+        Mutation: {
+            ...courseResolvers.Mutation,
+            ...userResolvers.Mutation
+        }
+    }
+})
 
 const app = express()
 

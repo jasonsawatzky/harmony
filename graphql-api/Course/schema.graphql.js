@@ -1,5 +1,4 @@
 const { makeExecutableSchema } = require('graphql-tools')
-const resolvers = require('./resolvers')
 
 const courseSchema = `
 	id: Int
@@ -10,7 +9,7 @@ const courseSchema = `
 	url: String
 `
 
-const typeDefs = `
+module.exports = makeExecutableSchema({ typeDefs: `
 	type Query {
 		course(id: Int!): Course
 		courses(
@@ -29,6 +28,4 @@ const typeDefs = `
 	type Course {
 		${courseSchema}
 	}
-`
-
-module.exports = makeExecutableSchema({ typeDefs, resolvers })
+`})
