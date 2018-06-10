@@ -18,7 +18,7 @@ module.exports = makeExecutableSchema({ typeDefs: `
 		${userSchema}
 	}
 	type Mutation {
-		createUser(user: UserInput): User
+		createUser(user: UserInput): String
 	}
 	input UserInput {
 		${userSchema}

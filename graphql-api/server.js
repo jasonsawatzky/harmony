@@ -2,6 +2,7 @@ const { mergeSchemas } = require('graphql-tools')
 const express = require('express')
 const { graphqlExpress, graphiqlExpress } = require('apollo-server-express')
 const bodyParser = require('body-parser')
+const cors = require('cors')
 
 
 // TODO: extract logic to merge schemas into separate file
@@ -30,6 +31,9 @@ app.set('port', process.env.PORT || 3000)
 if (app.get('env') === 'development') {
     app.set('graphiql', true)
 }
+
+// Enable CORS
+app.use(cors())
 
 // The GraphQL endpoint
 app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }))
