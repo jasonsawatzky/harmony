@@ -116,7 +116,7 @@ class CategoryMenu extends React.Component {
 							this.state.notifications[index]
 							? <Badge
 								badgeContent={this.state.notifications[index]}
-								color='seondary'
+								color='primary'
 								className={classes.padding}
 							>
 								{tabName}

@@ -20,3 +20,7 @@ export const signedIn = {
 	path: '/signedIn',
 	Component: components.SignedIn
 }
+export const register = {
+	path: '/register',
+	Component: components.Register
+}

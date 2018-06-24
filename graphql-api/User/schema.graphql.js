@@ -1,17 +1,18 @@
 const { makeExecutableSchema } = require('graphql-tools')
 
 const userSchema = `
-	name: String
+	firstName: String
+	lastName: String
 	username: String
 	email: String
 	birthdate: String
 	password: String
-	confirmPass: String
+	confirmPassword: String
 `
 
 module.exports = makeExecutableSchema({ typeDefs: `
 	type Query {
-		user(id: String!): User
+		user(email: String!): User
 		users(${userSchema}): [User]
 	}
 	type User {

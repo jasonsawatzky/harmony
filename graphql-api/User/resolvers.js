@@ -2,7 +2,7 @@ const User = require('./schema.mongo')
 
 module.exports = {
 	Query: {
-		user: (_, { id }) => id.match(/^[0-9a-f]{24}$/i) && User.findById(id),
+		user: (_, { email }) => User.findOne({ email }),
 		users: (_, args) => User.find(args)
 	},
 	Mutation: {

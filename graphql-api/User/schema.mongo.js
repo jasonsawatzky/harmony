@@ -2,7 +2,11 @@ const mongoose = require('../connection')
 const bcrypt = require('bcrypt')
 
 const schema = mongoose.Schema({
-	name: {
+	firstName: {
+		type: String,
+		required: true
+	},
+	lastName: {
 		type: String,
 		required: true
 	},

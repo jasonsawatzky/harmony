@@ -73,10 +73,16 @@ const ExpandedNavbar = classes =>
 					Harmony
 				</Typography>
 				<div>
-					<Button component='a'color='inherit' href='https://harmony.auth.us-west-2.amazoncognito.com/signup?response_type=token&client_id=15cs6b84gu1tvp2ctu69kqncft&redirect_uri=http://localhost:3001'>
+					{/* <Button component='a'color='inherit' href='https://harmony.auth.us-west-2.amazoncognito.com/signup?response_type=token&client_id=15cs6b84gu1tvp2ctu69kqncft&redirect_uri=http://localhost:3001'>
 						Register
 					</Button>
 					<Button component='a' color='inherit' href='https://harmony.auth.us-west-2.amazoncognito.com/login?response_type=token&client_id=15cs6b84gu1tvp2ctu69kqncft&redirect_uri=http://localhost:3001/signedIn'>
+						Login
+					</Button> */}
+					<Button component={Link} color='inherit' to='/register'>
+						Register
+					</Button>
+					<Button component={Link} color='inherit' to='login'>
 						Login
 					</Button>
 				</div>
