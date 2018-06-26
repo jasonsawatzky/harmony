@@ -1,0 +1,23 @@
+service: harmony-graph-ql
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  environment:
+    DEPLOYMENT_STAGE : ${opt:stage, self:provider.stage}
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+custom:
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true
+
+functions:
+  status:
+    handler: server.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'

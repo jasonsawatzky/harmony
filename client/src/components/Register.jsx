@@ -56,7 +56,15 @@ class Register extends React.Component {
 		birthdate: ''
 	}
 
-	handleChange = name => event => this.setState({ [name]: event.target.value })
+	handleChange = name => event => {
+		if (name === "confirmPassword" && this.state.password !== event.target.value) {
+			console.log("password missmatch")
+			console.log(event)
+		}
+		else if (name === "confirmPassword") console.log("passwords match")
+
+		return this.setState({ [name]: event.target.value })
+	}
 
 	render() {
 		const { classes } = this.props
@@ -74,6 +82,7 @@ class Register extends React.Component {
 							{registerUser =>
 								<form onSubmit={event => {
 									event.preventDefault()
+									console.log("register: ", this.state)
 									registerUser({ variables: { user: this.state } })
 								}}>
 								<Grid

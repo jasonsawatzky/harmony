@@ -1,4 +1,6 @@
+import conf from "deployment-configuration.js"
+
 export default {
-	api: 'localhost:3000/graphql',
-	cognito: 'https://harmony.auth.us-west-2.amazoncognito.com'
+	api: conf.api.url,
+	cognito:  conf.cognito.url
 }

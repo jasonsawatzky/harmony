@@ -1,0 +1,23 @@
+version: 0.1
+
+phases:
+  install:
+    commands:
+      - apt-get -y update
+      - apt-get -y install zip
+      - npm install -g serverless
+      - npm install -S serverless-finch
+      - npm install -S serverless-offline
+      - sls help
+  build:
+    commands:
+  post_build:
+    commands:
+#      - ./node_modules/.bin/nyc ./node_modules/.bin/mocha
+      - sls deploy
+      - sls client deploy    
+artifacts:
+  files:
+    - serverless.yml
+    - publish.zip
+  discard-paths: yes

@@ -3,21 +3,18 @@ const express = require('express')
 const { graphqlExpress, graphiqlExpress } = require('apollo-server-express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-
+const awsServerlessExpress = require('aws-serverless-express')
 
 // TODO: extract logic to merge schemas into separate file
-const { schema: courseSchema, resolvers: courseResolvers } = require('./Course')
 const { schema: userSchema, resolvers: userResolvers } = require('./User')
 
 const schema = mergeSchemas({
-    schemas: [courseSchema, userSchema],
+    schemas: [userSchema],
     resolvers: {
         Query: {
-            ...courseResolvers.Query,
             ...userResolvers.Query
         },
         Mutation: {
-            ...courseResolvers.Mutation,
             ...userResolvers.Mutation
         }
     }
@@ -42,4 +39,6 @@ app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }))
 app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))
 
 // Start server
-app.listen(app.get('port'), () => console.log(`GraphQL server up on port ${app.get('port')}.`))
+// app.listen(app.get('port'), () => console.log(`GraphQL server up on port ${app.get('port')}.`))
+const server = awsServerlessExpress.createServer(app)
+exports.handler = (event, context) => awsServerlessExpress.proxy(server, event, context)
