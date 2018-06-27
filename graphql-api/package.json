@@ -28,10 +28,10 @@
     "serverless-offline": "^3.25.4",
     "serverless-webpack": "^5.1.5",
     "webpack": "^4.12.1",
-    "webpack-node-externals": "^1.7.2"
-  },
-  "devDependencies": {
+    "webpack-node-externals": "^1.7.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "webpack-cli": "^3.0.8"
+  },
+  "devDependencies": {
   }
 }

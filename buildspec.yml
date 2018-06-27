@@ -8,14 +8,16 @@ phases:
       - npm install -g serverless
       - npm install -S serverless-finch
       - npm install -S serverless-offline
-      - sls help
+      - npm install -S babel-cli
+      - npm install -S babel-preset-es2015
+      - babel-node deployment-configuration/pull-deployment-configuration.js > deployment-configuration.json
+      - cat deployment-configuration.json
   build:
     commands:
   post_build:
     commands:
-#      - ./node_modules/.bin/nyc ./node_modules/.bin/mocha
       - sls deploy
-      - sls client deploy    
+      # - sls client deploy
 artifacts:
   files:
     - serverless.yml
