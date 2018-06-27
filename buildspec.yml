@@ -10,7 +10,8 @@ phases:
       - npm install -S serverless-offline
       - npm install -S babel-cli
       - npm install -S babel-preset-es2015
-      - babel-node deployment-configuration/pull-deployment-configuration.js > deployment-configuration.json
+      - npm install aws-sdk
+      - node node_modules/babel-cli/bin/babel-node.js deployment-configuration/pull-deployment-configuration.js > deployment-configuration.json
       - cat deployment-configuration.json
   build:
     commands:
