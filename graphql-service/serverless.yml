@@ -1,4 +1,4 @@
-service: harmony-graph-ql
+service: harmony-graphql-service
 
 provider:
   name: aws

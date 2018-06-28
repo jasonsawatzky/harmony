@@ -1,4 +1,4 @@
-import conf from "deployment-configuration.js"
+import conf from "../deployment-config/deployment-config.js"
 
 export default {
 	api: conf.api.url,

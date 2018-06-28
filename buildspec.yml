@@ -1,4 +1,4 @@
-version: 0.1
+version: 0.2
 
 phases:
   install:
@@ -6,21 +6,35 @@ phases:
       - apt-get -y update
       - apt-get -y install zip
       - npm install -g serverless
-      - npm install -S serverless-finch
-      - npm install -S serverless-offline
-      - npm install -S babel-cli
-      - npm install -S babel-preset-es2015
-      - npm install aws-sdk
-      - node node_modules/babel-cli/bin/babel-node.js deployment-configuration/pull-deployment-configuration.js > deployment-configuration.json
-      - cat deployment-configuration.json
+      - npm install -g serverless-offline
+      - npm install -g serverless-finch
   build:
     commands:
+      # Pull the deployment configuration file
+      - cd deployment-config
+      - npm install
+      - node node_modules/babel-cli/bin/babel-node.js pull-deployment-configuration.js > deployment-config.json
+      - cat deployment-config.json
+      - cd ..
+
+      # Build graphql-service
+      - cd graphql-service
+      - npm install
+      - sls package
+      - cd ..
+
+      # Build client
+      - cd client
+      - npm install
+      - npm run build
+      - cd ..
   post_build:
     commands:
-      - sls deploy
-      # - sls client deploy
-artifacts:
-  files:
-    - serverless.yml
-    - publish.zip
-  discard-paths: yes
+      # Deploy graphql-service
+      - cd graphql-service
+      - sls deploy --package .serverless
+      - cd ..
+
+      # Deploy client
+      - cd client
+      - sls client deploy --no-confirm

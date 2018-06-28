@@ -1,0 +1,20 @@
+{
+  "stage" : {
+    "mongo" : {
+      "userName" : "",
+      "password" : "",
+      "domain" : "",
+      "port" : "",
+      "dbName" : ""
+    },
+
+    "api" : {
+      "url" : ""
+    },
+
+    "cognito" : {
+      "url" : ""
+    }
+  },
+  ...
+}

@@ -1,0 +1,16 @@
+{
+  "name": "deployment-config",
+  "version": "1.0.0",
+  "description": "",
+  "main": "deployment-config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.265.1",
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1"
+  }
+}
