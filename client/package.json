@@ -8,6 +8,7 @@
     "amazon-cognito-auth-js": "^1.2.2",
     "apollo-boost": "^0.1.7",
     "axios": "^0.18.0",
+    "deployment-config": "file:../deployment-config",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",
     "jsonwebtoken": "^8.2.2",
