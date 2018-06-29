@@ -1,6 +1,6 @@
-import conf from "../deployment-config/deployment-config.js"
+import {config} from "../deployment-config"
 
 export default {
-	api: conf.api.url,
-	cognito:  conf.cognito.url
+	api: config.api.url,
+	cognito:  config.cognito.url
 }

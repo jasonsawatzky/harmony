@@ -13,8 +13,8 @@ phases:
       # Pull the deployment configuration file
       - cd deployment-config
       - npm install
-      - node node_modules/babel-cli/bin/babel-node.js pull-deployment-configuration.js > deployment-config.json
-      - cat deployment-config.json
+      - npm run pull dev
+      - cat configs/dev.json
       - cd ..
 
       # Build graphql-service

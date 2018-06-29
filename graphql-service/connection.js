@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
-import conf from "../deployment-config/deployment-config.js"
-const mongo = conf.mongo
+import mongoose from 'mongoose'
+import {config} from '../deployment-config'
+const mongo = config.mongo
 
 const url = 'mongodb://' + mongo.userName +
 	':' + mongo.password + '@' + mongo.domain +
