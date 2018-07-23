@@ -1,5 +1,5 @@
 const mongoose = require('./connection')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs') //TODO Switch back to bcrypt
 
 const schema = mongoose.Schema({
 	firstName: {
