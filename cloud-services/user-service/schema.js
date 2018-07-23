@@ -1,4 +1,4 @@
-const mongoose = require('../connection')
+const mongoose = require('./connection')
 const bcrypt = require('bcrypt')
 
 const schema = mongoose.Schema({

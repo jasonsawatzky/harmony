@@ -6,14 +6,23 @@
 ## Building the Application
 
 ### Install Global Tools
+Ensure you have node v8.11.3 or newer installed
+```
+node -v
+```
+
 ```
 npm install -g serverless
 npm install -g serverless-offline
 npm install -g serverless-finch
 ```
+Ensure that serverless has been added to your PATH
+```
+serverless help
+```
 
 ### Install dependencies
-From both the cloud-services and client directories, run:
+From both the deployment-config, and then the graphql-service and client directories, run:
 ```
 npm install
 ```
