@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const config = require('../../deployment-config').config
+const config = require('../../deployment-config')
 
 // import mongoose from 'mongoose'
 // import {config} from '../../deployment-config'

@@ -10,5 +10,6 @@ export function list() {
 }
 
 export async function create(user) {
+  console.log("user service: create")
   return (await dao.create(user))._id
 }
