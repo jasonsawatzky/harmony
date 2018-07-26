@@ -1,4 +1,4 @@
 module.exports = {
-	schema: require('./schema.graphql'),
+	schema: require('./schema'),
 	resolvers: require('./resolvers')
 }

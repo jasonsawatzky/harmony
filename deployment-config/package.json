@@ -5,8 +5,8 @@
   "main": "deployment-config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "pull": "node node_modules/babel-cli/bin/babel-node.js -e 'require(`./index.js`).pull()'",
-    "push": "node node_modules/babel-cli/bin/babel-node.js -e 'require(`./index.js`).push()'"
+    "pull": "node node_modules/babel-cli/bin/babel-node.js -e 'require(`./sync.js`).pull()'",
+    "push": "node node_modules/babel-cli/bin/babel-node.js -e 'require(`./sync.js`).push()'"
   },
   "author": "",
   "license": "ISC",

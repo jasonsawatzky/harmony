@@ -8,9 +8,9 @@
     "port": "",
     "dbName": ""
   },
-
-  "api" :{
-    "url": ""
+  
+  "client" :{
+    "apiUrl": ""
   },
 
   "cognito": {
