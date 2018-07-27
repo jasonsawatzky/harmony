@@ -10,7 +10,15 @@ import ApolloClient from 'apollo-boost'
 import config from './config'
 console.log("client config", config)
 console.log("process.env", process.env)
+
+const link = createHttpLink({
+  uri: '/graphql',
+  credentials: 'same-origin'
+});
+
 const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  link,
 	uri: config.apiUrl + '/graphql'
 })
 

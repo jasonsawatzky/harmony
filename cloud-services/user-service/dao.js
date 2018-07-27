@@ -11,5 +11,5 @@ export function getAll() {
 
 export async function create(user) {
   console.log("userdao : create")
-  return (await User.create(user))._id
+  return (await users.create(user))._id
 }
