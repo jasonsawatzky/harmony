@@ -10,7 +10,7 @@ import ApolloClient from 'apollo-boost'
 // import {config} from '../deployment-config'
 
 const client = new ApolloClient({
-	uri: "localhost:3000" + '/graphql'
+	uri: 'localhost:3000/graphql'
 })
 
 ReactDOM.render(
