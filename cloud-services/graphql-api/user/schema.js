@@ -14,6 +14,7 @@ module.exports = makeExecutableSchema({ typeDefs: `
 	type Query {
 		user(email: String!): User
 		users(${userSchema}): [User]
+		session(username: String!, password: String!): String
 	}
 	type User {
 		${userSchema}

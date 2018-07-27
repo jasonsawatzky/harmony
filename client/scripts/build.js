@@ -5,7 +5,7 @@ process.env.BABEL_ENV = 'production';
 process.env.NODE_ENV = 'production';
 
 if (!process.argv[2]) {
-  console.("Error: You must specify the stage: npm build <stage>")
+  console.log("Error: You must specify the stage: npm build <stage>")
   process.exit(1)
 }
 process.env.DEPLOYMENT_STAGE = process.argv[2];
