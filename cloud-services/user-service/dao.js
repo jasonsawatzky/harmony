@@ -1,15 +1,18 @@
 const users = require('./schema')
-console.log("dao", users)
+const ObjectID = require('mongodb').ObjectID
+import {hash} from 'bcryptjs' //TODO Switch to less expensive hash
+
 export function get (id) {
-  console.log("userdao : get")
-  return users.findOne({ id })
+  const res = users.findById(id)
+  return res
 }
 
 export function getAll() {
   return users.find()
 }
 
-export async function create(user) {
-  console.log("userdao : create")
+export async function create(id, user) {
+  const cutID = id.slice(0,12)
+  user["_id"] = ObjectID(cutID)
   return (await users.create(user))._id
 }

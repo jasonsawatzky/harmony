@@ -1,25 +1,33 @@
-const dao = require('./dao') //TODO Switch to import
-const cognito = require('./cognito')
-console.log(cognito)
+import * as dao from './dao'
+import * as cognito from './cognito'
 
 export function get(id) {
-  console.log("user service: get")
-  console.log("dao", dao)
   return dao.get(id)
 }
 
+export function getCurrent(context) {
+  console.log(context)
+  return context.auth ? get(context.auth.id) :  `No user session`
+}
+
 export function list() {
+  console.log()
   return dao.getAll()
 }
 
 export async function create(user) {
-  console.log("user service: create: user: ", user)
-
-  cognito.signUp(user)
-
-  return (await dao.create(user))._id
+  console.log('User Service: create:', user)
+  try {
+    const cogUser = await cognito.signUp(user)
+    const daoUser = await dao.create(cogUser.UserSub, user)
+    return daoUser
+  }
+  catch(e) {
+    console.log("create error", e)
+  }
 }
 
 export async function getSession(credentials) {
+  console.log("User Service: getSession:", credentials.id)
   return cognito.signIn(credentials)
 }

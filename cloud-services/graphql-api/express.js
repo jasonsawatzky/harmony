@@ -4,8 +4,8 @@ const { graphqlExpress, graphiqlExpress } = require('apollo-server-express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const awsServerlessExpress = require('aws-serverless-express')
-import {client as clientConfig} from 'deployment-config'
-import {authRequest} from './auth'
+import { client as clientConfig } from 'deployment-config'
+import { authExpress } from './auth'
 
 // TODO: extract logic to merge schemas into separate file
 const { schema: userSchema, resolvers: userResolvers } = require('./user')
@@ -19,7 +19,7 @@ const schema = mergeSchemas({
         Mutation: {
             ...userResolvers.Mutation
         }
-    }
+    },
 })
 
 const app = express()
@@ -36,11 +36,17 @@ app.use(cors({
   credentials: true
 }))
 
-// Identify the user
-app.use(authRequest)
+// Authenicate the request
+app.use(authExpress)
 
-// The GraphQL endpoint
-app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }))
+app.use('/graphql', bodyParser.json(), graphqlExpress(req => {
+  return {
+    schema: schema,
+    context: {
+      auth: req.auth
+    }
+  }
+}))
 
 // GraphiQL, a visual editor for queries
 app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }))

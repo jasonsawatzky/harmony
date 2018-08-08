@@ -13,6 +13,7 @@ const userSchema = `
 module.exports = makeExecutableSchema({ typeDefs: `
 	type Query {
 		user(email: String!): User
+		currentUser : User
 		users(${userSchema}): [User]
 		session(username: String!, password: String!): String
 	}

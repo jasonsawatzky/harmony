@@ -4,9 +4,13 @@ import{cognito as cognitoConfig} from 'deployment-config'
 
 // https://aws.amazon.com/blogs/mobile/integrating-amazon-cognito-user-pools-with-api-gateway/
 
-export async function authRequest(req, res, next) {
+/*
+** Express middleware for authentication
+*/
+export async function authExpress(req, res, next) {
   try {
-    req.auth = await (auth(req))
+    const token = req.headers['x-access-token']
+    req.auth = await (authenticateToken(token))
     next()
   }
   catch(e) {
@@ -14,15 +18,13 @@ export async function authRequest(req, res, next) {
   }
 }
 
-export async function auth(req) {
-  const token = req.headers['x-access-token'];
+export async function authenticateToken(token) {
   if (!token) {
-    req.user = null
-    console.log('No AUTH in request')
-    return req
+    console.log('No token in request')
+    return null // TODO Add appropriate message for client
   }
 
-  const decodedJwt = jwt.decode(token, {complete: true});
+  const decodedJwt = jwt.decode(token, {complete: true})
   if (!decodedJwt) {
     throw 'Invalid token'
   }
@@ -37,13 +39,17 @@ export async function auth(req) {
   }
   else {
     try {
+      // Verify the validity of the token
       const verifyToken =  promisify(jwt.verify)
-      const res = await verifyToken(token, cognitoConfig.pems[decodedJwt.header.kid], { issuer: decodedJwt.payload.iss })
-      console.log("Verified token: ", res)
-      return res
+      const auth = await verifyToken(token, cognitoConfig.pems[decodedJwt.header.kid], { issuer: decodedJwt.payload.iss })
+
+      auth.id = auth.sub.slice(0,12) // Trim the cognito UserSub to a 12 character ID
+      console.log("Verified user session:", auth)
+      return auth
     }
     catch(e) {
-      throw 'Can not verify token'
+      console.log('Can not verify token')
+      return null // TODO Add appropriate message for client
     }
   }
 }
