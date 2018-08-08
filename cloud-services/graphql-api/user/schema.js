@@ -1,4 +1,4 @@
-const { makeExecutableSchema } = require('graphql-tools')
+import { makeExecutableSchema } from 'graphql-tools'
 
 const userSchema = `
 	firstName: String
@@ -10,7 +10,7 @@ const userSchema = `
 	confirmPassword: String
 `
 
-module.exports = makeExecutableSchema({ typeDefs: `
+export default makeExecutableSchema({ typeDefs: `
 	type Query {
 		user(email: String!): User
 		currentUser : User

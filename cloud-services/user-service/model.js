@@ -1,5 +1,6 @@
-const mongoose = require('./connection')
+import mongoose from './connection'
 const bcrypt = require('bcryptjs') //TODO Switch back to bcrypt
+import { hash } from 'bcryptjs'
 
 const schema = mongoose.Schema({
 	firstName: {
@@ -32,4 +33,4 @@ schema.pre('save', async function () {
 	this.password = await bcrypt.hash(this.password, 10)
 })
 
-module.exports = mongoose.model('User', schema)
+export default mongoose.model('User', schema)

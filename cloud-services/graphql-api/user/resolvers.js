@@ -1,6 +1,6 @@
-const userService = require('../../user-service')
+import * as userService from 'user-service'
 
-module.exports = {
+export default {
 	Query: {
 		user: (_, { id }, context) => userService.get(id),
 		users: (_, args) => userService.getAll(),

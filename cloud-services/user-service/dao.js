@@ -1,8 +1,8 @@
-const users = require('./schema')
-const ObjectID = require('mongodb').ObjectID
-import {hash} from 'bcryptjs' //TODO Switch to less expensive hash
+import users from './model'
+import { ObjectID } from 'mongodb'
+import { hash } from 'bcryptjs' //TODO Switch to less expensive hash
 
-export function get (id) {
+export function get(id) {
   const res = users.findById(id)
   return res
 }

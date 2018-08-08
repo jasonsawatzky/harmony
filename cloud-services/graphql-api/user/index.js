@@ -1,4 +1,7 @@
-module.exports = {
-	schema: require('./schema'),
-	resolvers: require('./resolvers')
+import schema from './schema'
+import resolvers from './resolvers'
+
+export default {
+	schema,
+	resolvers
 }
