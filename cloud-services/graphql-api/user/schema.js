@@ -9,7 +9,6 @@ const userSchema = `
 	password: String
 	confirmPassword: String
 `
-
 export default makeExecutableSchema({ typeDefs: `
 	type Query {
 		user(email: String!): User

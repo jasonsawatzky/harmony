@@ -1,33 +1,45 @@
-import * as dao from './dao'
 import * as cognito from './cognito'
+import Dao from './dao'
 
-export function get(id) {
-  return dao.get(id)
-}
+let dao
 
-export function getCurrent(context) {
-  console.log(context)
-  return context.auth ? get(context.auth.id) :  `No user session`
-}
-
-export function list() {
-  console.log()
-  return dao.getAll()
-}
-
-export async function create(user) {
-  console.log('User Service: create:', user)
-  try {
-    const cogUser = await cognito.signUp(user)
-    const daoUser = await dao.create(cogUser.UserSub, user)
-    return daoUser
+class UserService {
+  constructor(conn) {
+    dao = Dao(conn)
   }
-  catch(e) {
-    console.log("create error", e)
+
+  get(id) {
+    return dao.get(id)
+  }
+
+  getCurrent(context) {
+    console.log(`User Service: getCurrent`)
+    return context.auth ? this.get(context.auth.id) :  `No user session`
+  }
+
+  list() {
+    console.log()
+    return dao.getAll()
+  }
+
+  async create(user) {
+    console.log('User Service: create:', user)
+    try {
+      const cogUser = await cognito.signUp(user)
+      const daoUser = await dao.create(cogUser.UserSub, user)
+      return daoUser
+    }
+    catch(e) {
+      console.log("create error", e)
+    }
+  }
+
+  async getSession(credentials) {
+    console.log("User Service: getSession:", credentials.username)
+    return cognito.signIn(credentials)
   }
 }
 
-export async function getSession(credentials) {
-  console.log("User Service: getSession:", credentials.id)
-  return cognito.signIn(credentials)
+export default function create(conn) {
+  return new UserService(conn)
 }

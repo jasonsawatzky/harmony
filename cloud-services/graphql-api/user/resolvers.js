@@ -1,11 +1,11 @@
-import * as userService from 'user-service'
+import UserService from 'user-service'
 
 export default {
 	Query: {
-		user: (_, { id }, context) => userService.get(id),
-		users: (_, args) => userService.getAll(),
-		currentUser: (_, args, context) => userService.getCurrent(context),
-		session: (_, creds) => userService.getSession(creds)
+		user: (_, { id }, context) => UserService(context.conn).get(id),
+		users: (_, args, context) => UserService(context.conn).getAll(),
+		currentUser: (_, args, context) => UserService(context.conn).getCurrent(context),
+		session: (_, creds, context) => UserService(context.conn).getSession(creds)
 	},
 	Mutation: {
 		createUser: (_, { user }) => userService.create(user)

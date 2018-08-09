@@ -44,7 +44,7 @@ export async function authenticateToken(token) {
       const auth = await verifyToken(token, cognitoConfig.pems[decodedJwt.header.kid], { issuer: decodedJwt.payload.iss })
 
       auth.id = auth.sub.slice(0,12) // Trim the cognito UserSub to a 12 character ID
-      console.log('Verified user session:', auth)
+      console.log('Verified user session:')
       return auth
     }
     catch(e) {

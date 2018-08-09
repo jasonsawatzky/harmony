@@ -14,7 +14,8 @@ graphqlApiExpress.use(graphqlExpress(req => {
   return {
     schema: schema,
     context: {
-      auth: req.auth
+      auth: req.auth,
+      conn: req.conn
     }
   }
 }))

@@ -4,7 +4,7 @@ import awsServerlessExpress from 'aws-serverless-express'
 import { client as clientConfig } from 'deployment-config'
 import { authExpress } from './auth'
 import { graphqlApiExpress, graphiql } from 'graphql-api'
-
+import conn from './connection'
 
 const app = express()
 
@@ -22,6 +22,11 @@ app.use(cors({
 
 // Authenicate the request
 app.use(authExpress)
+
+app.use(function(req, res, next) {
+  req.conn = conn
+  next()
+})
 
 app.use('/graphql', graphqlApiExpress)
 

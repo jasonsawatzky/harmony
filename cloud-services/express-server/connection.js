@@ -1,4 +1,4 @@
-import * as mongoose from 'mongoose'
+import mongoose from 'mongoose'
 import { mongo } from '../../deployment-config'
 
 const url = 'mongodb://' + mongo.userName +
