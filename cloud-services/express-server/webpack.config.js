@@ -8,7 +8,7 @@ module.exports = {
   devtool: 'source-map',
   // Since 'aws-sdk' is not compatible with webpack,
   // we exclude all node dependencies
-  externals: [nodeExternals({ whitelist: ['user-service', 'graphql-api'] })],
+  externals: [nodeExternals({ whitelist: ['user-service', 'graphql-api', 'group-service'] })],
   mode: slsw.lib.webpack.isLocal ? "development" : "production",
   optimization: {
     // We no not want to minimize our code.

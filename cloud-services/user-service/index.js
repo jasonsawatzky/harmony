@@ -8,25 +8,18 @@ class UserService {
     dao = Dao(conn)
   }
 
-  get(id) {
+  get(context, id) {
     return dao.get(id)
   }
 
   getCurrent(context) {
-    console.log(`User Service: getCurrent`)
-    return context.auth ? this.get(context.auth.id) :  `No user session`
-  }
-
-  list() {
-    console.log()
-    return dao.getAll()
+    return context.auth ? this.get(context, context.auth.id) :  `No user session`
   }
 
   async create(user) {
-    console.log('User Service: create:', user)
     try {
       const cogUser = await cognito.signUp(user)
-      const daoUser = await dao.create(cogUser.UserSub, user)
+      const daoUser = dao.create(cogUser.UserSub, user)
       return daoUser
     }
     catch(e) {
@@ -34,8 +27,7 @@ class UserService {
     }
   }
 
-  async getSession(credentials) {
-    console.log("User Service: getSession:", credentials.username)
+  getSession(credentials) {
     return cognito.signIn(credentials)
   }
 }

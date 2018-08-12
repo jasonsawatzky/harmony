@@ -1,5 +1,5 @@
 {
-  "name": "graphql-api",
+  "name": "group-service",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,8 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "connect": "^3.6.6",
-    "group-service": "file:../group-service",
+    "mongoose": "^5.2.7",
     "user-service": "file:../user-service"
   }
 }

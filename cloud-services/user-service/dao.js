@@ -8,13 +8,11 @@ class UserDao {
     users = Users(conn)
   }
 
-  get(id) {
-    const res = users.findById(id)
+  async get(id) {
+    const res = await users.findById(id)
+    res.id =res._id
+    delete res._id
     return res
-  }
-
-  getAll() {
-    return users.find()
   }
 
   async create(id, user) {
