@@ -1,6 +1,7 @@
-import {cognito as cognitoConfig} from 'deployment-config'
-import {CognitoIdentityServiceProvider} from 'aws-sdk'
-import {AuthenticationDetails, CognitoUserPool, CognitoUser} from 'amazon-cognito-identity-js'
+import { cognito as cognitoConfig } from 'deployment-config'
+import { CognitoIdentityServiceProvider } from 'aws-sdk'
+import { AuthenticationDetails, CognitoUserPool, CognitoUser } from 'amazon-cognito-identity-js'
+import { promisify } from 'util'
 
 const cognito = new CognitoIdentityServiceProvider({
   region: cognitoConfig.region
@@ -27,16 +28,25 @@ export async function signUp(user) {
     ]
   }
 
-  console.log("params: ", params)
-  console.log("user: ", user)
-
-  cognito.signUp(params, function(err, result){
-    if (err) {
-        console.log(err)
-        return
-    }
-    console.log("success: ", result)
+  const promise = new Promise(function (resolve, reject) {
+    cognito.signUp(params, function(err, res) {
+      if (err) {
+        reject(err)
+      }
+      else {
+        resolve(res)
+      }
+    })
   })
+
+  try {
+    const res = await promise
+    console.log(`Cognito: User signed up:`, res)
+    return res
+  }
+  catch(e) {
+    console.log(`Cognito: Error signing up user:`, e)
+  }
 }
 
 export async function signIn(credentials) {
@@ -69,6 +79,6 @@ export async function signIn(credentials) {
       return res.idToken.jwtToken
     }
     catch(e) {
-      console.log(e)
+      console.log(`Cognito: Error signing user in:`, e)
     }
 }
