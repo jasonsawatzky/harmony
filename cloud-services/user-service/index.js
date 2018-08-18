@@ -9,7 +9,17 @@ class UserService {
   }
 
   get(context, id) {
+    console.log("getUser:", id)
     return dao.get(id)
+  }
+
+  setDetail(context, userId, propName, value) {
+    console.log(context.auth.id, userId)
+    dao.setDetail(userId, propName, value)
+  }
+
+  getDetails(context, user) {
+    return user.details
   }
 
   getCurrent(context) {

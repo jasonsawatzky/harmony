@@ -12,11 +12,13 @@ export default {
 	},
 	User: {
 		groups: (user, __, context) => GroupService(context.conn).getUserGroups(context, user.id),
-		createGroup: (user, { description }, context) => GroupService(context.conn).create(context, user.id, description)
+		createGroup: (user, { description }, context) => GroupService(context.conn).create(context, user.id, description),
+		setInstagramLink: (user, { value }, context) => UserService(context.conn).setDetail(context, user.id, "instagramLink", value),
+		details: (user, _, context) => UserService(context.conn).getDetails(context, user)
 	},
 	Group: {
 		creator: (group, _, context) => UserService(context.conn).get(context, group.creator),
 		members: (group, _, context) => GroupService(context.conn).getMembers(context, group),
 		addMembers: (group, { groupId, memberIds }, context) => GroupService(context.conn).addMembers(context, group, memberIds)
-	}
+	},
 }

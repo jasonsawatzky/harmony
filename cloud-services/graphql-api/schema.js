@@ -13,7 +13,7 @@ const userInputSchema = `
 
 export default makeExecutableSchema({ typeDefs: `
 	type Query {
-		currentUser : User
+		currentUser: User
 		session(username: String!, password: String!): String
 		group(id: String): Group
 	}
@@ -21,6 +21,16 @@ export default makeExecutableSchema({ typeDefs: `
 		${userInputSchema}
 		groups: [Group]
 		createGroup(description: String): String
+		details: UserDetails
+		setInstagramLink(value: String): String
+	}
+	type UserDetails {
+		instagramLink: String
+	}
+	type Requirements {
+		gender: String,
+		maxAge: Int,
+		minAge: Int
 	}
 	type Group {
 		id: ID

@@ -28,6 +28,15 @@ export default function(conn) {
 		password: {
 			type: String,
 			required: true
+		},
+		instagramLink: {
+			type: String,
+			required: false
+		},
+		details: {
+			type: Map,
+			of: String,
+			required: false
 		}
 	})
 

@@ -1,0 +1,345 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2018-08-18T19:44:25.303Z",
+	"__export_source": "insomnia.desktop.app:v6.0.2",
+	"resources": [
+		{
+			"_id": "wrk_bb6ad500cb23498682ac038a6f70f16d",
+			"created": 1532668216200,
+			"description": "",
+			"modified": 1532668216200,
+			"name": "Insomnia",
+			"parentId": null,
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_62973c4bd02e433da5ab6331ff7525f7",
+			"color": null,
+			"created": 1532668216232,
+			"data": {},
+			"isPrivate": false,
+			"metaSortKey": 1532668216232,
+			"modified": 1533862471793,
+			"name": "New Environment",
+			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_ef825456280b483c838581e96c51c3bf",
+			"cookies": [],
+			"created": 1532668216238,
+			"modified": 1532668216238,
+			"name": "Default Jar",
+			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "req_6fb9d0ff2f1c41c9985c4ee600ef69ef",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/graphql",
+				"text": "{\"query\":\"{\\n\\tsession(username : \\\"jasons\\\", password : \\\"Password1$\\\")\\n}\"}"
+			},
+			"created": 1532668455648,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_27d72a1124694bb59e6d3a5bf80ba763",
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"disabled": true,
+					"id": "pair_0cd080b421ee457b8eae074360099822",
+					"name": "X-Access-Token",
+					"value": "eyJraWQiOiJRMitrbGFManBuTTBwRitBaWFlYnI4U2VzcW5adEF6bVR4WG1pY3E2eWJNPSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI4YzAyMzc1OC02M2FmLTQyMTUtYTNiMy1jODVjNTQ2ZmMyNDgiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC51cy1lYXN0LTEuYW1hem9uYXdzLmNvbVwvdXMtZWFzdC0xX2xqMXMxS0RkSiIsInBob25lX251bWJlcl92ZXJpZmllZCI6ZmFsc2UsImNvZ25pdG86dXNlcm5hbWUiOiJqYXNvbnMiLCJnaXZlbl9uYW1lIjoiamFzb24gc2F3IiwiYXVkIjoiN2cxb2hwNnFvaGx1bXRxdTd0bWJqZ243bWEiLCJldmVudF9pZCI6IjdmZmNjM2ViLTk2YTItMTFlOC1hMWM1LWExOWJkMGZmNzU4YyIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNTMzMjQ4NTMxLCJwaG9uZV9udW1iZXIiOiIrMTExMTExMTExMSIsImV4cCI6MTUzMzI1MjEzMSwiaWF0IjoxNTMzMjQ4NTMxLCJlbWFpbCI6Imphc29uQGouY29tIn0.G4lAxrObW3UkPTwzNqIAIZ3ZFyBdRuq-XcX6u_u_AGKZ_GwAVGKAhgIAyiJwtU7AAfvz3pe0riaQO-iKFaTa6SypLpz7tSBZYsLt5yeFlDug1qQboXhU3hPLVsC-KH3J6mBH3BbgDmBhJpHhDJM69WCqrk9QygdYd1wxk_UDx33w_zEf7pUdGCCwmIyKcvroDRsO6VAehtA9f1BjHP6qBU1swdsfaOLgputICCHuG76umagOBHmFHWrdEVIF1Swvr5p0QxPq4OlLYALTnbF24uKQ24SaT4z-biEmZG8P4Er8MhUrVv2E96n72tbuQzoTkUkUjLOYj0pxn6lBfp3aJw"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1532668455648,
+			"method": "POST",
+			"modified": 1534621277899,
+			"name": "Log In Client as jasons",
+			"parameters": [],
+			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "localhost:3000/graphql",
+			"_type": "request"
+		},
+		{
+			"_id": "req_e13ed8d691b1404288f15b1b9c1f546a",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/graphql",
+				"text": "{\"query\":\"{\\n\\tcurrentUser {\\n\\t\\tid,\\n\\t\\tlastName\\n\\t}\\n}\"}"
+			},
+			"created": 1532747889938,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_1dbd9010ef47497185a351b4dfb28d56",
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_92063688698340eaa70eacb04eb3df8b",
+					"name": "X-Access-Token",
+					"value": "{{auth}}"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1532747889938,
+			"method": "POST",
+			"modified": 1534621274775,
+			"name": "Get CurrentUser",
+			"parameters": [],
+			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "localhost:3000/graphql",
+			"_type": "request"
+		},
+		{
+			"_id": "req_6c41fb3835ef45229f8430274fc0d4d2",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/graphql",
+				"text": "{\"query\":\"mutation CreateUser($ui : UserInput!) {\\n  createUser(user : $ui)\\n}\",\"variables\":{\"ui\":{\"firstName\":\"jason\",\"lastName\":\"s\",\"username\":\"jasons\",\"email\":\"jasons@gmail.com\",\"birthdate\":\"1/1/2000\",\"password\":\"Password1$\",\"confirmPassword\":\"Password1$\"}},\"operationName\":\"CreateUser\"}"
+			},
+			"created": 1533626806769,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_737ef09b03fc4756a52e39949ca25c0a",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1533626806769,
+			"method": "POST",
+			"modified": 1534621206409,
+			"name": "Sign Up jasons",
+			"parameters": [],
+			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "localhost:3000/graphql",
+			"_type": "request"
+		},
+		{
+			"_id": "req_0defaccfa4a44f9c855783a04e180e72",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/graphql",
+				"text": "{\"query\":\"{\\n\\tcurrentUser {\\n\\t\\tgroups {\\n\\t\\t\\tid,\\n\\t\\t\\tdescription,\\n\\t\\t\\tcreator {\\n\\t\\t\\t\\tfirstName\\n\\t\\t\\t}\\n\\t\\t\\tmembers {\\n\\t\\t\\t\\tfirstName\\n\\t\\t\\t}\\n\\t\\t}\\n\\t}\\n}\"}"
+			},
+			"created": 1533795010381,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_92bed0368786425580122dcfcf9876fc",
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_ad7db35c3ff64b1cbef615f39f43ef85",
+					"name": "X-Access-Token",
+					"value": "{{auth}}"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1533795010381,
+			"method": "POST",
+			"modified": 1534621290771,
+			"name": "Get CurrentUser Groups",
+			"parameters": [],
+			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{ url  }}",
+			"_type": "request"
+		},
+		{
+			"_id": "req_ba08df3ccafd40c99b21f4aa1d18547c",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/graphql",
+				"text": "{\"query\":\"{\\n\\tcurrentUser {\\n\\t\\tcreateGroup(description : \\\"Group 5\\\")\\n\\t}\\n}\"}"
+			},
+			"created": 1533804782897,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_8fd313fa7ab74be3a3356d6c8dfdcec5",
+					"name": "X-Access-Token",
+					"value": "{{auth}}"
+				},
+				{
+					"id": "pair_2ffdbe5db53043a89d36dc63a1c2b947",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1533804782897,
+			"method": "POST",
+			"modified": 1534621308076,
+			"name": "Create Group on CurrentUser",
+			"parameters": [],
+			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "localhost:3000/graphql",
+			"_type": "request"
+		},
+		{
+			"_id": "req_de3ade73ca0b450ab893e45902b297ea",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/graphql",
+				"text": "{\"query\":\"{\\n\\tgroup(id: \\\"5b6fab960bbb332041a8ed59\\\") {\\n\\t\\taddMembers(memberIds: [\\\"32356634653937632d663932\\\"])\\n\\t}\\n}\"}"
+			},
+			"created": 1533953115627,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_e569b80aaac94fc5b5a921a9647183c5",
+					"name": "X-Access-Token",
+					"value": "{{ auth  }}"
+				},
+				{
+					"id": "pair_1e312c54527c48cc871b12e8fdb3a813",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1533953115627,
+			"method": "POST",
+			"modified": 1534621308663,
+			"name": "Add Member to Group",
+			"parameters": [],
+			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{url}}",
+			"_type": "request"
+		},
+		{
+			"_id": "req_7710ab20b5e64c3e98e9b41d503f1f6b",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/graphql",
+				"text": "{\"query\":\"{\\n\\tcurrentUser {\\n\\t\\tsetInstagramLink(value: \\\"instagram.com/jasonsawatzky\\\")\\n\\t}\\n}\"}"
+			},
+			"created": 1534116077012,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_8814b085496a4ce7a89bc8584ff84ea7",
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_c00edeb6398e463387e68d2c52a9cf50",
+					"name": "X-Access-Token",
+					"value": "{{ auth  }}"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1534116077012,
+			"method": "POST",
+			"modified": 1534621312613,
+			"name": "Add CurrentUser InstagramLink",
+			"parameters": [],
+			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{url}}",
+			"_type": "request"
+		},
+		{
+			"_id": "req_0c43a8a8eb3945d8a00b61cfbdb7b895",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/graphql",
+				"text": "{\"query\":\"{\\n\\tcurrentUser {\\n\\t\\tdetails {\\n\\t\\t\\tinstagramLink\\n\\t\\t}\\n\\t}\\n}\"}"
+			},
+			"created": 1534118312365,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_3464977c238b4280b61e752463a17704",
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_05076122dab04c7ba21ef5a942ad007b",
+					"name": "X-Access-Token",
+					"value": "{{auth}}"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1534118312365,
+			"method": "POST",
+			"modified": 1534621240087,
+			"name": "Get CurrentUser InstagramLink",
+			"parameters": [],
+			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{url}}",
+			"_type": "request"
+		},
+		{
+			"_id": "env_af7b159ff18f47558e7db26551bb8af9",
+			"color": null,
+			"created": 1533862458258,
+			"data": {
+				"auth": "{% response 'body', 'req_6fb9d0ff2f1c41c9985c4ee600ef69ef', '$.data.session' %}",
+				"url": "localhost:3000/graphql"
+			},
+			"isPrivate": false,
+			"metaSortKey": 1533862458258,
+			"modified": 1533863189334,
+			"name": "Local",
+			"parentId": "env_62973c4bd02e433da5ab6331ff7525f7",
+			"_type": "environment"
+		}
+	]
+}

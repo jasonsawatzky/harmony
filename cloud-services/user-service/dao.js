@@ -9,16 +9,46 @@ class UserDao {
   }
 
   async get(id) {
-    const res = await users.findById(id)
-    res.id =res._id
-    delete res._id
-    return res
+    const user = {}
+    const res = await users.findById(id).exec()
+
+    user.id =res._id
+
+    if (res.details) {
+      user.details = {}
+      res.details.forEach((value, key) => {
+        user.details[key] = value
+      })
+    }
+
+    const keys = [`firstName`, `lastName`, `userName`, `email`]
+    keys.forEach(key => {
+      user[key] = res.get(key)
+    })
+
+    return user
   }
 
   async create(id, user) {
     const cutID = id.slice(0,12)
     user["_id"] = ObjectID(cutID)
     return (await users.create(user))._id
+  }
+
+  async setDetail(userId, propName, value) {
+    try {
+      // const user = await this.get(userId)
+      const user = await users.findById(userId).exec()
+
+      user.set(`details.` + propName, value)
+
+      await user.save()
+
+      return user.id
+    }
+    catch(e) {
+      console.log("Error setting User Detail", e)
+    }
   }
 }
 
