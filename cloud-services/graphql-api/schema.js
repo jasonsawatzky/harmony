@@ -15,11 +15,11 @@ export default makeExecutableSchema({ typeDefs: `
 	type Query {
 		currentUser: User
 		session(username: String!, password: String!): String
-		group(id: String): Group
 	}
 	type User {
 		${userInputSchema}
 		groups: [Group]
+		group(id: String): Group
 		createGroup(description: String): String
 		details: UserDetails
 		setInstagramLink(value: String): String

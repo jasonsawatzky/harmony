@@ -1,47 +1,94 @@
+import Dao, { createDocument } from '../Dao'
+import UserModel from './model'
+import { getGroupByOwner, createGroup } from 'group-service'
 import * as cognito from './cognito'
-import Dao from './dao'
 
 let dao
+let conn
 
-class UserService {
-  constructor(conn) {
-    dao = Dao(conn)
-  }
-
-  get(context, id) {
-    console.log("getUser:", id)
-    return dao.get(id)
-  }
-
-  setDetail(context, userId, propName, value) {
-    console.log(context.auth.id, userId)
-    dao.setDetail(userId, propName, value)
-  }
-
-  getDetails(context, user) {
-    return user.details
-  }
-
-  getCurrent(context) {
-    return context.auth ? this.get(context, context.auth.id) :  `No user session`
-  }
-
-  async create(user) {
-    try {
-      const cogUser = await cognito.signUp(user)
-      const daoUser = dao.create(cogUser.UserSub, user)
-      return daoUser
+class User {
+  constructor(conn, id, dao) {
+    if (dao) {
+      this.dao = dao
     }
-    catch(e) {
-      console.log("create error", e)
+    else {
+      this.dao = Dao(conn, { Model: UserModel, id: id })
     }
+    this.conn = conn
   }
 
-  getSession(credentials) {
-    return cognito.signIn(credentials)
+  id() {
+    return this.dao.get('id')
+  }
+
+  firstName() {
+    return this.dao.get('firstName')
+  }
+
+  setFirstName() {
+  }
+
+  lastName() {
+    return this.dao.get('lastName')
+  }
+
+  username() {
+    return this.dao.get('username')
+  }
+
+  email() {
+    return this.dao.get('email')
+  }
+
+  birthdate() {
+    return this.dao.get('birthdate')
+  }
+
+  async details() {
+    const details = await this.dao.get('details')
+    const output = {}
+    details.forEach((value, name) => output[name] = value)
+
+    return output
+  }
+
+  setDetail(name, value) {
+    return this.dao.set('details', details => details.set(name, value))
+  }
+
+  async groups() {
+    return getGroupByOwner(this.conn, await this.id())
+  }
+
+  async group(id) {
+    return (await this.groups()).find(async group => await group.id() === id)
+  }
+
+  async startGroup(description) {
+    return createGroup(this.conn, await this.id(), description)
   }
 }
 
-export default function create(conn) {
-  return new UserService(conn)
+export default function (conn, id) {
+  return new User(conn, id)
+}
+
+export async function create(conn, input) {
+  try {
+    const cogUser = await cognito.signUp(input)
+    const id = cogUser.UserSub.slice(0,12)
+    const dao = createDocument(conn, UserModels, input, id)
+    return new User(conn, null, dao)
+  }
+  catch(e) {
+    console.log(`Error creating new user`, e)
+  }
+}
+
+export function getUser(conn, id) {
+  return new User(conn, id)
+}
+
+export function getSession(credentials) {
+  return cognito.signIn(credentials)
 }

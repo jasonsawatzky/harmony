@@ -1,6 +1,5 @@
 const bcrypt = require('bcryptjs') //TODO Switch back to bcrypt
 import { hash } from 'bcryptjs'
-import User from 'user-service'
 import mongoose from 'mongoose'
 
 let model
