@@ -9,7 +9,7 @@ export default class AbstractView {
       this.dao = initDao(conn, { Models: Models, id: id })
     }
     this.conn = conn
-}
+  }
 
   static init({ conn, id, dao }) {
    return new this({ conn, id, dao })

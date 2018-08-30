@@ -1,5 +1,5 @@
 {
-  "name": "graphql-api",
+  "name": "question",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,9 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "connect": "^3.6.6",
-    "group-service": "file:../group-service",
-    "question": "file:../question",
-    "user-service": "file:../user-service"
+    "answer": "file:../answer",
+    "service-components": "file:../service-components"
   }
 }

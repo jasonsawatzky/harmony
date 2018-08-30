@@ -23,6 +23,8 @@ export default makeExecutableSchema({ typeDefs: `
 		createGroup(description: String): String
 		details: UserDetails
 		setInstagramLink(value: String): String
+		question(id: String): Question
+		createQuestion(text: String, required: Boolean, answers: [String]): Question
 	}
 	type UserDetails {
 		instagramLink: String
@@ -39,6 +41,20 @@ export default makeExecutableSchema({ typeDefs: `
 		description: String
 		addMembers(groupId: String, memberIds: [String]): String
 	}
+
+	type Answer {
+		id: ID,
+		text: String,
+		rating: Int
+	}
+
+	type Question {
+		id: ID,
+		text: String,
+		required: Boolean,
+		answers: [Answer]
+	}
+
 	type Mutation {
 		createUser(user: UserInput): String
 	}

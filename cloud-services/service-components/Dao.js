@@ -23,6 +23,10 @@ class Dao {
     return await this.cmodel
   }
 
+  getId() {
+    return this.id
+  }
+
   async get(prop) {
     if (prop === 'id') {
       return this.id
