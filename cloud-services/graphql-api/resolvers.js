@@ -1,24 +1,32 @@
-import UserService from 'user-service'
+import { User, UserGroupmateView } from 'user-service'
 import GroupService from 'group-service'
 
 export default {
 	Query: {
-		currentUser: (_, args, context) => UserService(context.conn).getCurrent(context),
-		session: (_, creds, context) => UserService(context.conn).getSession(creds),
-		group: (_, { id }, context) => GroupService(context.conn).get(context, id)
+		currentUser: (_, __, context) => User.init({ conn: context.conn, id: context.auth.id }),
+		session: (_, creds) => User.getSession(creds),
 	},
 	Mutation: {
-		createUser: (_, { user }, context) => UserService(context.conn).create(user),
+		createUser: (_, { user }, context) => User.create(context.conn, user),
 	},
 	User: {
-		groups: (user, __, context) => GroupService(context.conn).getUserGroups(context, user.id),
-		createGroup: (user, { description }, context) => GroupService(context.conn).create(context, user.id, description),
-		setInstagramLink: (user, { value }, context) => UserService(context.conn).setDetail(context, user.id, "instagramLink", value),
-		details: (user, _, context) => UserService(context.conn).getDetails(context, user)
+		id: (user) => user.id(),
+		firstName: (user) => user.firstName(),
+		lastName: (user) => user.lastName(),
+		username: (user) => user.username(),
+		email: (user) => user.email(),
+		birthdate: (user) => user.birthdate(),
+		groups: (user) => user.groups(),
+		group: (user, { id }) => user.group(id),
+		createGroup: (user, { description }) => user.startGroup(description),
+		setInstagramLink: (user, { value }) => user.setDetail('instagramLink', value),
+		details: (user) => user.details(),
 	},
 	Group: {
-		creator: (group, _, context) => UserService(context.conn).get(context, group.creator),
-		members: (group, _, context) => GroupService(context.conn).getMembers(context, group),
-		addMembers: (group, { groupId, memberIds }, context) => GroupService(context.conn).addMembers(context, group, memberIds)
+		id: (group) => group.id(),
+		description: (group) => group.description(),
+		creator: (group) => group.creator(),
+		members: (group) => group.members(),
+		addMembers: (group, { groupId, memberIds }) => group.addMembers(memberIds)
 	},
 }

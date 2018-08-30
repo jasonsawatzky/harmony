@@ -1,6 +1,5 @@
-const bcrypt = require('bcryptjs') //TODO Switch back to bcrypt
+ const bcrypt = require('bcryptjs') //TODO Switch back to bcrypt
 import { hash } from 'bcryptjs'
-import User from 'user-service'
 import mongoose from 'mongoose'
 
 let model
@@ -15,14 +14,14 @@ export default function(conn) {
 		},
 		members: [{
 			type: mongoose.Schema.Types.ObjectId,
-			ref: 'User'
+			ref: 'User',
+      index: true
 		}],
 		description: {
 			type: String,
 			required: true
 		}
 	})
-
 
 	if (!model) {
 		model = conn.model('Group', schema)

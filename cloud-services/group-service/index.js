@@ -1,59 +1,16 @@
-import Dao from './dao'
-import UserService from 'user-service'
+import { Dao } from 'service-components'
+import GroupModel from './model'
 
-let dao
+import Group from './views/Group'
+import GroupMemberView from './views/GroupMemberView'
 
-class GroupService {
-  constructor(conn) {
-    dao = Dao(conn)
-  }
+export { Group, GroupMemberView }
 
-  get(context, id) {
-    return dao.get(id)
-  }
+export async function getByMember(conn, ownerId) {
+  const models = await Dao.getByIndexList(conn, GroupModel, 'members', ownerId)
+  const groups = models.map(model =>
+    Dao.initDao(conn, { model: model, Model: GroupModel })
+  )
 
-  getUserGroups(context, userId) {
-    console.log("getUserGroups")
-    return dao.getByOwner(userId)
-  }
-
-  addMembers(context, group, memberIds) {
-    // TODO Check permissions
-    // if (group.creator !== context.auth.id) {
-    // }
-
-    return dao.addMembers(group.id, memberIds)
-  }
-
-  getMembers(context, group) {
-    const userService = UserService(context.conn)
-
-    const users = group.members.map(member => {
-      return userService.get(context, member)
-    })
-
-    return users
-  }
-
-  create(context, owner, description) {
-    try {
-
-      // TODO Check permissions
-      // if (owner !== context.auth.id) {
-      // }
-
-      const group = dao.create({
-        creator: owner,
-        description: description
-      })
-      return group
-    }
-    catch(e) {
-      console.log("Error creating group", e)
-    }
-  }
-}
-
-export default function create(conn) {
-  return new GroupService(conn)
+  return groups
 }

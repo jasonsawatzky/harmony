@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "mongoose": "^5.2.7",
+    "service-components": "file:../service-components",
     "user-service": "file:../user-service"
   }
 }
