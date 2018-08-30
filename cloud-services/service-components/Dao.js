@@ -5,12 +5,13 @@ let cmodel
 let id
 
 class Dao {
-  constructor(conn, { model, Model, id }) {
+  constructor(conn, { model, Models, id }) {
     if (model) {
       this.cmodel = model
+      this.id = this.cmodel.get('id')
       return
     }
-    this.models = Model(conn)
+    this.models = Models(conn)
     this.id = id
   }
 
@@ -24,7 +25,7 @@ class Dao {
 
   async get(prop) {
     if (prop === 'id') {
-      prop = '_id'
+      return this.id
     }
 
     const model = await this.model()
@@ -38,11 +39,10 @@ class Dao {
     await model.save()
 
     return model.id
-
   }
 }
 
-export default function (...args) {
+export function initDao(...args) {
   return new Dao(...args)
 }
 
@@ -54,14 +54,24 @@ export async function getByIndex (conn, Models, indexName, id) {
   })
 }
 
+export async function getByIndexList(conn, Models, indexName, id) {
+  const models = Models(conn)
+
+  return models.find({
+    'members': {
+      $in: [id]
+    }
+  })
+}
+
 export async function createDocument(conn, Models, props, id) {
   if (id) {
     props._id = id
   }
 
-  const model = Models(conn)
+  const models = Models(conn)
 
-  id = (await model.create(props))._id
+  const model = (await models.create(props))
 
-  return new Dao(conn, { model, id} )
+  return new Dao(conn, { Models, model, id} )
 }

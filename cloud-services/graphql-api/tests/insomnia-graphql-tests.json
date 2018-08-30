@@ -1,7 +1,7 @@
 {
 	"_type": "export",
 	"__export_format": 3,
-	"__export_date": "2018-08-26T23:14:45.280Z",
+	"__export_date": "2018-08-30T05:37:55.183Z",
 	"__export_source": "insomnia.desktop.app:v6.0.2",
 	"resources": [
 		{
@@ -59,7 +59,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1532668455648,
 			"method": "POST",
-			"modified": 1535325211871,
+			"modified": 1535607411569,
 			"name": "Log In Client as jasons",
 			"parameters": [],
 			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
@@ -77,7 +77,7 @@
 			"authentication": {},
 			"body": {
 				"mimeType": "application/graphql",
-				"text": "{\"query\":\"{\\n\\tcurrentUser {\\n\\t\\tid,\\n\\t\\tlastName,\\n\\t\\tfirstName,\\n\\t\\tusername,\\n\\t\\temail,\\n\\t\\tbirthdate,\\n\\t\\tgroups {\\n\\t\\t\\tid,\\n\\t\\t\\tdescription,\\n\\t\\t\\tcreator {\\n\\t\\t\\t\\tusername\\n\\t\\t\\t},\\n\\t\\t\\tmembers {\\n\\t\\t\\t\\tusername\\n\\t\\t\\t}\\n\\t\\t}\\n\\t}\\n}\"}"
+				"text": "{\"query\":\"{\\n\\tcurrentUser {\\n\\t\\tid,\\n\\t\\tlastName,\\n\\t\\tfirstName,\\n\\t\\tusername,\\n\\t\\temail,\\n\\t\\tbirthdate,\\n\\t\\tgroups {\\n\\t\\t\\tid,\\n\\t\\t\\tdescription,\\n\\t\\t\\tcreator {\\n\\t\\t\\t\\tusername\\n\\t\\t\\t},\\n\\t\\t\\tmembers {\\n\\t\\t\\t\\tusername,\\n\\t\\t\\t\\tgroups {\\n\\t\\t\\t\\t\\tdescription\\n\\t\\t\\t\\t}\\n\\t\\t\\t}\\n\\t\\t}\\n\\t}\\n}\"}"
 			},
 			"created": 1532747889938,
 			"description": "",
@@ -96,7 +96,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1532747889938,
 			"method": "POST",
-			"modified": 1535325214162,
+			"modified": 1535607414167,
 			"name": "Get CurrentUser",
 			"parameters": [],
 			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
@@ -114,7 +114,7 @@
 			"authentication": {},
 			"body": {
 				"mimeType": "application/graphql",
-				"text": "{\"query\":\"mutation CreateUser($ui : UserInput!) {\\n  createUser(user : $ui)\\n}\",\"variables\":{\"ui\":{\"firstName\":\"jason\",\"lastName\":\"s\",\"username\":\"jasons32\",\"email\":\"jasons32@gmail.com\",\"birthdate\":\"1/1/2000\",\"password\":\"Password1$\",\"confirmPassword\":\"Password1$\"}},\"operationName\":\"CreateUser\"}"
+				"text": "{\"query\":\"mutation CreateUser($ui : UserInput!) {\\n  createUser(user : $ui)\\n}\",\"variables\":{\"ui\":{\"firstName\":\"jason\",\"lastName\":\"s\",\"username\":\"jasons\",\"email\":\"jasons@gmail.com\",\"birthdate\":\"1/1/2000\",\"password\":\"Password1$\",\"confirmPassword\":\"Password1$\"}},\"operationName\":\"CreateUser\"}"
 			},
 			"created": 1533626806769,
 			"description": "",
@@ -128,7 +128,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1533626806769,
 			"method": "POST",
-			"modified": 1535325217838,
+			"modified": 1535607445592,
 			"name": "Sign Up jasons",
 			"parameters": [],
 			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
@@ -165,7 +165,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1533795010381,
 			"method": "POST",
-			"modified": 1535325220080,
+			"modified": 1535607447775,
 			"name": "Get CurrentUser Groups",
 			"parameters": [],
 			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
@@ -183,7 +183,7 @@
 			"authentication": {},
 			"body": {
 				"mimeType": "application/graphql",
-				"text": "{\"query\":\"{\\n\\tcurrentUser {\\n\\t\\tcreateGroup(description : \\\"Group 1\\\")\\n\\t}\\n}\"}"
+				"text": "{\"query\":\"{\\n\\tcurrentUser {\\n\\t\\tcreateGroup(description : \\\"Test Group2\\\")\\n\\t}\\n}\"}"
 			},
 			"created": 1533804782897,
 			"description": "",
@@ -202,7 +202,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1533804782897,
 			"method": "POST",
-			"modified": 1535325228185,
+			"modified": 1535607449587,
 			"name": "Create Group on CurrentUser",
 			"parameters": [],
 			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
@@ -220,7 +220,7 @@
 			"authentication": {},
 			"body": {
 				"mimeType": "application/graphql",
-				"text": "{\"query\":\"{\\n\\tcurrentUser {\\n\\t\\tgroup(id: \\\"5b6f9499401d8c186e1d2982\\\") {\\n\\t\\t\\taddMembers(memberIds: [\\\"37303734306566362d653434\\\"])\\n\\t\\t}\\n\\t}\\n}\"}"
+				"text": "{\"query\":\"{\\n\\tcurrentUser {\\n\\t\\tgroups {id},\\n\\t\\tgroup(id: \\\"5b8346380fe46454c9cbc5f3\\\") {\\n\\t\\t\\taddMembers(memberIds: [\\\"32356634653937632d663932\\\"])\\n\\t\\t}\\n\\t}\\n}\"}"
 			},
 			"created": 1533953115627,
 			"description": "",
@@ -239,7 +239,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1533953115627,
 			"method": "POST",
-			"modified": 1535325230570,
+			"modified": 1535607452601,
 			"name": "Add Member to Group",
 			"parameters": [],
 			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
@@ -276,7 +276,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1534116077012,
 			"method": "POST",
-			"modified": 1535325259011,
+			"modified": 1535607457459,
 			"name": "Add CurrentUser InstagramLink",
 			"parameters": [],
 			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
@@ -313,7 +313,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1534118312365,
 			"method": "POST",
-			"modified": 1535325260561,
+			"modified": 1535607456170,
 			"name": "Get CurrentUser InstagramLink",
 			"parameters": [],
 			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
@@ -324,6 +324,38 @@
 			"settingSendCookies": true,
 			"settingStoreCookies": true,
 			"url": "{{url}}",
+			"_type": "request"
+		},
+		{
+			"_id": "req_77e107811b2844c09b670b3887d899f8",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/graphql",
+				"text": "{\"query\":\"mutation CreateUser($ui : UserInput!) {\\n  createUser(user : $ui)\\n}\",\"variables\":{\"ui\":{\"firstName\":\"derek\",\"lastName\":\"l\",\"username\":\"derek\",\"email\":\"derek@gmail.com\",\"birthdate\":\"1/1/2000\",\"password\":\"Password1$\",\"confirmPassword\":\"Password1$\"}},\"operationName\":\"CreateUser\"}"
+			},
+			"created": 1535329507196,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_737ef09b03fc4756a52e39949ca25c0a",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1533187348353.5,
+			"method": "POST",
+			"modified": 1535607430731,
+			"name": "Sign up derekl",
+			"parameters": [],
+			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "localhost:3000/graphql",
 			"_type": "request"
 		},
 		{

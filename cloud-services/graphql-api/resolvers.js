@@ -1,11 +1,10 @@
-import User, { getSession, getUser } from 'user-service'
+import { User, UserGroupmateView } from 'user-service'
 import GroupService from 'group-service'
-console.log("User Class:", User)
 
 export default {
 	Query: {
-		currentUser: (_, args, context) => getUser(context.conn, context.auth.id),
-		session: (_, creds, context) => getSession(creds),
+		currentUser: (_, __, context) => User.init({ conn: context.conn, id: context.auth.id }),
+		session: (_, creds) => User.getSession(creds),
 	},
 	Mutation: {
 		createUser: (_, { user }, context) => User.create(context.conn, user),

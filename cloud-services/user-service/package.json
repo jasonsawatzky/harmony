@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "group-service": "file:../group-service"
+    "group-service": "file:../group-service",
+    "service-components": "file:../service-components"
   }
 }
