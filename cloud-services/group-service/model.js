@@ -3,7 +3,6 @@ import { hash } from 'bcryptjs'
 import mongoose from 'mongoose'
 
 let model
-console.log(mongoose.Schema.Types.ObjectId)
 export default function(conn) {
 	const schema = conn.Schema({
 		creator: {

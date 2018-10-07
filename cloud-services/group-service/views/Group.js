@@ -12,6 +12,10 @@ export default class Group extends AbstractView {
     super({ conn, id, dao, Models: GroupModel })
   }
 
+  static async getAll(conn) {
+    return (await Dao.getAll(conn, GroupModel)).map(dao => new this({ conn, dao }))
+  }
+
   static create(conn, creator, description) {
    const dao = Dao.createDocument(conn, GroupModel, {
      creator: creator,

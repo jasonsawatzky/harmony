@@ -22,8 +22,12 @@ export default class Question extends AbstractView {
    return new this({ conn, dao })
   }
 
+  static async getAll(conn) {
+    return (await Dao.getAll(conn, Models)).map(dao => new this({ conn, dao }))
+  }
+
   async id() {
-    return (await this.dao).getId()
+    return (await this.dao).get('id')
   }
 
   text() {

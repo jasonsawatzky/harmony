@@ -1,4 +1,4 @@
-import { initDao } from './Dao'
+import Dao from './Dao'
 
 export default class AbstractView {
   constructor({ conn, id, dao, Models }) {
@@ -6,9 +6,13 @@ export default class AbstractView {
       this.dao = dao
     }
     else {
-      this.dao = initDao(conn, { Models: Models, id: id })
+      this.dao = Dao.init(conn, { Models: Models, id: id })
     }
     this.conn = conn
+  }
+
+  id() {
+    return this.dao.id
   }
 
   static init({ conn, id, dao }) {

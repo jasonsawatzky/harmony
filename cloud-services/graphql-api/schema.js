@@ -19,12 +19,16 @@ export default makeExecutableSchema({ typeDefs: `
 	type User {
 		${userInputSchema}
 		groups: [Group]
-		group(id: String): Group
+		group(id: ID): Group
 		createGroup(description: String): String
 		details: UserDetails
 		setInstagramLink(value: String): String
-		question(id: String): Question
+		question(id: ID): Question
+		questions: [Question]
 		createQuestion(text: String, required: Boolean, answers: [String]): Question
+		answerQuestion(id: ID, choice: ID): String
+		rateAnswer(question: ID, answer: ID, rating: Int): String
+		suggestion: Group
 	}
 	type UserDetails {
 		instagramLink: String
