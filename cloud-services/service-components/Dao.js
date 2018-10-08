@@ -4,8 +4,8 @@ let models
 let cmodel
 let id
 
-class Dao {
-  constructor(conn, { model, Models, id }) {
+export default class Dao {
+  constructor(conn, { model, Models, id, map }) {
     if (model) {
       this.cmodel = model
       this.id = this.cmodel.get('id')
@@ -13,6 +13,17 @@ class Dao {
     }
     this.models = Models(conn)
     this.id = id
+  }
+
+  static init(...args) {
+    return new Dao(...args)
+  }
+
+  static async getAll(conn, Models) {
+    const res = await (await Models(conn)).find().exec()
+    return res.map(model =>
+      new Dao(conn, { Models, model} )
+    )
   }
 
   async model() {
@@ -40,38 +51,34 @@ class Dao {
 
     return model.id
   }
-}
 
-export function initDao(...args) {
-  return new Dao(...args)
-}
+  static async getByIndex (conn, Models, indexName, id) {
+    const models = Models(conn)
 
-export async function getByIndex (conn, Models, indexName, id) {
-  const models = Models(conn)
-
-  return models.find({
-    [indexName]: ObjectID(id)
-  })
-}
-
-export async function getByIndexList(conn, Models, indexName, id) {
-  const models = Models(conn)
-
-  return models.find({
-    'members': {
-      $in: [id]
-    }
-  })
-}
-
-export async function createDocument(conn, Models, props, id) {
-  if (id) {
-    props._id = id
+    return models.find({
+      [indexName]: ObjectID(id)
+    })
   }
 
-  const models = Models(conn)
+  static async getByIndexList(conn, Models, indexName, id) {
+    const models = Models(conn)
 
-  const model = (await models.create(props))
+    return models.find({
+      'members': {
+        $in: [id]
+      }
+    })
+  }
 
-  return new Dao(conn, { Models, model, id} )
+  static async createDocument(conn, Models, props, id) {
+    if (id) {
+      props._id = id
+    }
+
+    const models = Models(conn)
+
+    const model = (await models.create(props))
+
+    return new Dao(conn, { Models, model, id} )
+  }
 }

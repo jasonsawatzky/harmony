@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "group-service": "file:../group-service",
+    "ml-hclust": "^1.3.0",
+    "question": "file:../question",
     "service-components": "file:../service-components"
   }
 }

@@ -1,0 +1,49 @@
+{
+  "name": "ml-hclust",
+  "version": "1.3.0",
+  "description": "Hierarchical clustering algorithms in Javascript",
+  "main": "src/index.js",
+  "directories": {
+    "lib": "src",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "npm run eslint && npm run test-mocha",
+    "test-mocha": "mocha --require should --reporter mocha-better-spec-reporter --recursive",
+    "eslint": "eslint src",
+    "eslint-fix": "eslint src --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mljs/hclust"
+  },
+  "keywords": [
+    "cluster",
+    "kmeans",
+    "hierarchical",
+    "data",
+    "mining",
+    "datamining",
+    "machine",
+    "learning"
+  ],
+  "author": "Miguel Asencio",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mljs/hclust/issues"
+  },
+  "homepage": "https://github.com/mljs/hclust",
+  "devDependencies": {
+    "eslint": "^3.16.0",
+    "eslint-config-cheminfo": "^1.6.0",
+    "eslint-plugin-no-only-tests": "^1.1.0",
+    "mocha": "^3.0.2",
+    "mocha-better-spec-reporter": "^3.0.2",
+    "should": "^11.1.0"
+  },
+  "dependencies": {
+    "heap": "^0.2.6",
+    "ml-distance-euclidean": "^1.0.0",
+    "ml-distance-matrix": "^1.0.0"
+  }
+}

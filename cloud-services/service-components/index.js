@@ -1,4 +1,4 @@
 import AbstractView from './AbstractView'
-import * as Dao from './Dao'
+import Dao from './Dao'
 
 export { AbstractView, Dao }

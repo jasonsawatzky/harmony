@@ -1,9 +1,33 @@
 const bcrypt = require('bcryptjs') //TODO Switch back to bcrypt
 import { hash } from 'bcryptjs'
+import mongoose from 'mongoose'
 
 let model
 
 export default function(conn) {
+	const answerRatingSchema = conn.Schema({
+		answer: {
+			type: mongoose.Schema.Types.ObjectId,
+			required: true,
+			index: true
+		},
+		rating: {
+			type: Number
+		}
+	})
+	const comparisonPointSchema = conn.Schema({
+		question: {
+			type: mongoose.Schema.Types.ObjectId,
+			required: true,
+			index: true
+		},
+		choice: {
+			type: mongoose.Schema.Types.ObjectId,
+			index: true
+		},
+		answerRatings: [answerRatingSchema]
+	})
+
 	const schema = conn.Schema({
 		firstName: {
 			type: String,
@@ -37,7 +61,8 @@ export default function(conn) {
 			type: Map,
 			of: String,
 			required: false
-		}
+		},
+		comparisonPoints: [comparisonPointSchema]
 	})
 
 	schema.pre('save', async function () {

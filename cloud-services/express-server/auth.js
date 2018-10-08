@@ -21,22 +21,21 @@ export async function authExpress(req, res, next) {
 
 export async function authenticateToken(token) {
   if (!token) {
-    console.log('No token in request')
-    return null // TODO Add appropriate message for client
+    return { status: 'No token in request' }
   }
 
   const decodedJwt = jwt.decode(token, {complete: true})
   if (!decodedJwt) {
-    throw 'Invalid token'
+    return { status: 'Invalid token' }
   }
   else if (decodedJwt.payload.iss != cognitoConfig.iss) {
-    throw 'Invalid issuer'
+    return { status: 'Invalid issuer' }
   }
   // else if (decodedJwt.payload.token_use != 'access') {
   //   throw new Error('Not an access token')
   // }
   else if (!cognitoConfig.pems[decodedJwt.header.kid]) {
-    throw 'Invalid access token'
+    return { status: 'Invalid access token' }
   }
   else {
     try {
@@ -45,12 +44,11 @@ export async function authenticateToken(token) {
       const auth = await verifyToken(token, cognitoConfig.pems[decodedJwt.header.kid], { issuer: decodedJwt.payload.iss })
 
       auth.id = ObjectId(auth.sub.slice(0,12)) // Trim the cognito UserSub to a 12 character ID
-      console.log('Verified user session:')
+      auth.status = 'Verified'
       return auth
     }
     catch(e) {
-      console.log('Can not verify token')
-      return null // TODO Add appropriate message for client
+      return { status: 'Can not verify token' }
     }
   }
 }
