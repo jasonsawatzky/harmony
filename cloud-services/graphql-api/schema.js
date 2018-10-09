@@ -28,7 +28,8 @@ export default makeExecutableSchema({ typeDefs: `
 		createQuestion(text: String, required: Boolean, answers: [String]): Question
 		answerQuestion(id: ID, choice: ID): String
 		rateAnswer(question: ID, answer: ID, rating: Int): String
-		suggestion: Group
+		activeGroup: Group
+		setActiveGroup(id: ID): String
 	}
 	type UserDetails {
 		instagramLink: String
@@ -44,6 +45,11 @@ export default makeExecutableSchema({ typeDefs: `
 		members: [User]
 		description: String
 		addMembers(groupId: String, memberIds: [String]): String
+		suggestion: Group
+		suggested(id: ID): Group
+		like: String
+		dislike: String
+		matches: [Group]
 	}
 
 	type Answer {

@@ -107,18 +107,19 @@ Cluster.prototype.find = function (test) {
  * @type {Cluster[]}
  */
 Cluster.prototype.findPath = function (test) {
-    function visit(root, test) {
+    async function visit(root, test) {
         if (root.children) {
             for (var i = root.children.length - 1; i >= 0; i--) {
-                const found = visit(root.children[i], test);
+                const found = await visit(root.children[i], test);
                 if (found) {
                   found.push(root)
                   return found
                 }
             }
         }
-        const found = test(root);
-        return found ? [root] : false
+        const found = await test(root);
+
+        return found ? [root] : false;
     }
     return visit(this, test);
 };
