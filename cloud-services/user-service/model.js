@@ -62,7 +62,12 @@ export default function(conn) {
 			of: String,
 			required: false
 		},
-		comparisonPoints: [comparisonPointSchema]
+		comparisonPoints: [comparisonPointSchema],
+		activeGroup: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Group',
+			index: true
+		}
 	})
 
 	schema.pre('save', async function () {

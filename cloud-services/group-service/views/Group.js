@@ -25,10 +25,6 @@ export default class Group extends AbstractView {
    return new this({ conn, dao })
   }
 
-  id() {
-    return this.dao.get('id')
-  }
-
   async creator() {
     return User.init({ conn: this.conn, id: (await this.dao.get('creator')) })
   }
@@ -47,4 +43,6 @@ export default class Group extends AbstractView {
   description() {
     return this.dao.get('description')
   }
+
+
 }

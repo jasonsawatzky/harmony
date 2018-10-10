@@ -27,16 +27,22 @@ export default {
 		createQuestion: (user, { text, required, answers }, context) => Question.create(context.conn, text, required, answers),
 		question: (user, { id }, context) => Question.init({ conn: context.conn, id }),
 		questions: (user, _, context) => Question.getAll(context.conn),
-		answerQuestion: (user, { id, choice }, context) => user.answerQuestion(id, choice),
+		answerQuestion: (user, { id, choice }) => user.answerQuestion(id, choice),
 		rateAnswer: (user, { question, answer, rating }) => user.rateAnswer(question, answer, rating),
-		suggestion: (user) => user.suggestion()
+		activeGroup: (user) => user.activeGroup(),
+		setActiveGroup: (user, { id }) => user.setActiveGroup(id)
 	},
 	Group: {
+		suggestion: (group) => group.suggestion(),
+		suggested: (group, { id }) => group.suggested(id),
 		id: (group) => group.id(),
 		description: (group) => group.description(),
 		creator: (group) => group.creator(),
 		members: (group) => group.members(),
-		addMembers: (group, { groupId, memberIds }) => group.addMembers(memberIds)
+		addMembers: (group, { groupId, memberIds }) => group.addMembers(memberIds),
+		like: (group) => group.like(),
+		dislike: (group) => group.dislike(),
+		matches: (group) => group.matches()
 	},
 	Question: {
 		id: (question) => question.id(),

@@ -1,4 +1,4 @@
-import { ObjectID } from 'mongodb'
+import { ObjectId } from 'mongodb'
 
 let models
 let cmodel
@@ -17,6 +17,10 @@ export default class Dao {
 
   static init(...args) {
     return new Dao(...args)
+  }
+
+  static ObjectId(id) {
+    return ObjectId(id)
   }
 
   static async getAll(conn, Models) {
@@ -43,9 +47,15 @@ export default class Dao {
     return await model[prop]
   }
 
-  async set(propName, setFunction) {
+  async set(propName, setFunction, value) {
     const model = await this.model()
-    setFunction(model[propName])
+
+    if (value) {
+      model[propName] = value
+    }
+    else {
+      setFunction(model[propName])
+    }
 
     await model.save()
 
@@ -56,7 +66,7 @@ export default class Dao {
     const models = Models(conn)
 
     return models.find({
-      [indexName]: ObjectID(id)
+      [indexName]: ObjectId(id)
     })
   }
 
@@ -64,10 +74,40 @@ export default class Dao {
     const models = Models(conn)
 
     return models.find({
-      'members': {
+      indexName: {
         $in: [id]
       }
     })
+  }
+
+  async getListElement(list, index, id) {
+    // return this.models.findById(this.id).select({ [list]: {$elemMatch: { [index]: id }}})
+
+    const suggestions = (await this.model())[list]
+    return suggestions.find(suggestion =>
+      this.equals(suggestion[index], id)
+    )
+  }
+
+  async updateListElement(list, indexName, index, updateFunction, newItem) {
+    const elements = await this.get(list)
+    const model = await this.model()
+
+    const found = elements.find(element => {
+      if (this.equals(element[indexName], index)) {
+        updateFunction(element)
+        model.save()
+        return true
+      }
+      else {
+        return false
+      }
+    })
+    if (!found) {
+      elements.push(newItem)
+    }
+
+    return found || newItem
   }
 
   static async createDocument(conn, Models, props, id) {
@@ -80,5 +120,10 @@ export default class Dao {
     const model = (await models.create(props))
 
     return new Dao(conn, { Models, model, id} )
+  }
+
+  equals(a, b) {
+    // console.log('equals: ', a, '|', b)
+    return JSON.stringify(a) === JSON.stringify(b)
   }
 }
