@@ -106,6 +106,8 @@ export default class Dao {
     if (!found) {
       elements.push(newItem)
     }
+
+    return found || newItem
   }
 
   static async createDocument(conn, Models, props, id) {

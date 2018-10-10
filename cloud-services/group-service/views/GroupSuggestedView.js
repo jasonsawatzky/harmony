@@ -8,10 +8,11 @@ export default class GroupSuggestedView extends Group {
   }
 
   async like() {
-    this.requester.setSuggestedStatus(this, 'like')
+    const suggested = await this.dao.getListElement('suggested', 'group', this.requester.id())
+    this.requester.like(this, suggested ? suggested.status : null)
   }
 
   async dislike() {
-    this.requester.setSuggestedStatus(this, 'dislike')
+    this.requester.dislike(this)
   }
 }

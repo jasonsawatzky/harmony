@@ -1,6 +1,7 @@
 import Group from './Group'
 import GroupSuggestedView from './GroupSuggestedView'
 import { agnes, Cluster, ClusterLeaf } from '../../ml-hclust'
+import MatchModel from '../match-model'
 
 export default class GroupMemberView extends Group {
   static init({ conn, id, dao, Models, requester }) {
@@ -15,11 +16,40 @@ export default class GroupMemberView extends Group {
   }
 
   async setSuggestedStatus(group, status) {
-    console.log("ID", group.id())
     if (!(await this.dao.updateListElement('suggested', 'group', group.id(), suggested => suggested.status = status))) {
       return Error('This group has not been recommended')
     }
-    console.log("test")
+  }
+
+  like(group, selfStatus) {
+    this.setSuggestedStatus(group, 'like')
+    if(selfStatus === 'like') {
+      this.match(group)
+    }
+  }
+
+  dislike(group) {
+    this.setSuggestedStatus(group, 'dislike')
+  }
+
+  async match(group) {
+    const Match = MatchModel(this.conn)
+
+    const matches = await Match.find({
+     groups: {
+       $in: [group.id()],
+       $in: [this.id()]
+     }
+   })
+
+   if (matches.length < 1) {
+     this.dao.constructor.createDocument(this.conn, MatchModel, {
+       groups: [
+         group.id(),
+         this.id()
+       ]
+     })
+   }
   }
 
   async suggested(id) {
@@ -80,7 +110,7 @@ export default class GroupMemberView extends Group {
     const path = await cluster.findPath(async cluster =>
       !(cluster instanceof ClusterLeaf) && cluster.value && equals(await cluster.value.id(), id))
     if (path.length > 2) {
-      const res = path[1].children[0].value
+      const res = path[1].children[1].value
       this.addSuggested(res.id())
       return res
     }
