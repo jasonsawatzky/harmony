@@ -24,12 +24,29 @@ export default class GroupMemberView extends Group {
   like(group, selfStatus) {
     this.setSuggestedStatus(group, 'like')
     if(selfStatus === 'like') {
-      this.match(group)
+      this.matchWith(group)
     }
   }
 
   dislike(group) {
     this.setSuggestedStatus(group, 'dislike')
+  }
+
+  async matchWith(group) {
+    const Match = MatchModel(this.conn)
+
+    const match = await this.match(group)
+    console.log("matchwith", match)
+
+    console.log(match, group.id(), this.id())
+    if (!match) {
+     Match.create({
+       groups: [
+         group.id(),
+         this.id()
+       ]
+     })
+    }
   }
 
   async match(group) {
@@ -42,15 +59,30 @@ export default class GroupMemberView extends Group {
      }
    })
 
-   if (matches.length < 1) {
-     this.dao.constructor.createDocument(this.conn, MatchModel, {
-       groups: [
-         group.id(),
-         this.id()
-       ]
-     })
+   if (matches.length > 0) {
+     return matches[0]
    }
+
+   return null
   }
+
+  async matches() {
+    const Match = MatchModel(this.conn)
+
+    const matches = await Match.find({
+     groups: {
+       $in: [this.id()]
+     }
+   })
+
+   const groupLists = matches.map(match => match.groups.map(groupId =>
+     GroupSuggestedView.init({ conn: this.conn, id: groupId })
+   ))
+
+   console.log(groupLists)
+
+   return groupLists
+ }
 
   async suggested(id) {
     const suggested = await this.dao.getListElement('suggested', 'group', id)

@@ -49,7 +49,7 @@ export default makeExecutableSchema({ typeDefs: `
 		suggested(id: ID): Group
 		like: String
 		dislike: String
-		matches: [Group]
+		matches: [[Group]]
 	}
 
 	type Answer {

@@ -40,9 +40,9 @@ export default {
 		creator: (group) => group.creator(),
 		members: (group) => group.members(),
 		addMembers: (group, { groupId, memberIds }) => group.addMembers(memberIds),
-		matches: (group) => group.matches(),
 		like: (group) => group.like(),
 		dislike: (group) => group.dislike(),
+		matches: (group) => group.matches()
 	},
 	Question: {
 		id: (question) => question.id(),
