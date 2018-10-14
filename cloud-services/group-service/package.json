@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mongoose": "^5.2.7",
+    "bcryptjs": "^2.4.3",
+    "mongoose": "^5.3.3",
     "service-components": "file:../service-components",
     "user-service": "file:../user-service"
   }

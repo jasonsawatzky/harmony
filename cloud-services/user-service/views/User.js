@@ -1,5 +1,3 @@
-// import Dao, { createDocument } from '../../Dao'
-import { UserGroupmateView } from 'user-service'
 import UserModels from '../model'
 import { Group, GroupMemberView, getByMember } from 'group-service'
 import * as cognito from '../cognito'
@@ -18,7 +16,7 @@ export default class User extends AbstractView {
   }
 
   async activeGroup() {
-    const group = await this.dao.get('activeGroup')
+    const group = JSON.parse(JSON.stringify(await this.dao.get('activeGroup')))
     return group ? GroupMemberView.init({ conn: this.conn, id: group, requester: this }) : Error('User has no active group')
   }
 

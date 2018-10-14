@@ -5,6 +5,7 @@ import { client as clientConfig } from 'deployment-config'
 import { authExpress } from './auth'
 import { graphqlApiExpress, graphiql } from 'graphql-api'
 import conn from './connection'
+import bodyParser from 'body-parser'
 
 const app = express()
 
@@ -28,10 +29,9 @@ app.use(function(req, res, next) {
   next()
 })
 
-app.use('/graphql', graphqlApiExpress)
+app.use(bodyParser.json())
 
-// GraphiQL, a visual editor for queries
-app.use('/graphiql', graphiql({ endpointURL: '/graphql' }))
+graphqlApiExpress.applyMiddleware({ app })
 
 // Start server
 const server = awsServerlessExpress.createServer(app)

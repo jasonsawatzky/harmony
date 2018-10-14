@@ -1,7 +1,13 @@
 function load() {
   // Module loaded in deployment by stage
-  console.log("Loading deployment config: ", process.env.DEPLOYMENT_STAGE)
-  return require('./configs/' + process.env.DEPLOYMENT_STAGE + '.json')
+  const stage = process.env.DEPLOYMENT_STAGE
+
+  if (stage === 'true') {
+    throw Error('Error: No configuration stage specified.')
+  }
+
+  console.log("Loading deployment config: ", stage)
+  return require('./configs/' + stage + '.json')
 
 }
 
