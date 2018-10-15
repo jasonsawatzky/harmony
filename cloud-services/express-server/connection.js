@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import { mongo } from '../../deployment-config'
+import { mongo } from 'deployment-config'
 
 const url = 'mongodb://' + mongo.userName +
 	':' + mongo.password + '@' + mongo.domain +

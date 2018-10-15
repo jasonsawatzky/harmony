@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "service-components": "file:../service-components"
+    "bcryptjs": "^2.4.3"
   }
 }

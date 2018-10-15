@@ -4,15 +4,18 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "node node_modules/serverless/bin/serverless offline start --skipCacheInvalidation --dontPrintOutput --stage",
+    "sls-offline": "node node_modules/serverless/bin/serverless offline start --skipCacheInvalidation --dontPrintOutput --stage",
     "sls": "node node_modules/serverless/bin/serverless",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node node_modules/webpack/bin/webpack.js",
+    "start": "node dist/main.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "deployment-config": "file:../deployment-config",
+    "@babel/polyfill": "^7.0.0",
+    "deployment-config": "file:deployment-config",
     "express-server": "file:express-server",
+    "graphql": "^14.0.2",
     "graphql-api": "file:graphql-api",
     "group-service": "file:group-service",
     "ml-hclust": "file:ml-hclust",

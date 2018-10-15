@@ -17,7 +17,7 @@ custom:
 
 functions:
   status:
-    handler: express-server/express.serverlessHook
+    handler: ./express-server/express.serverlessHook
     events:
       - http: ANY /
       - http: 'ANY {proxy+}'

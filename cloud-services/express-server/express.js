@@ -1,7 +1,11 @@
+import * as polyfill from '@babel/polyfill'
+require('es6-promise').polyfill();
+require('isomorphic-fetch');
 import express from 'express'
 import cors from 'cors'
 import awsServerlessExpress from 'aws-serverless-express'
 import { client as clientConfig } from 'deployment-config'
+
 import { authExpress } from './auth'
 import { graphqlApiExpress, graphiql } from 'graphql-api'
 import conn from './connection'
@@ -33,6 +37,13 @@ app.use(bodyParser.json())
 
 graphqlApiExpress.applyMiddleware({ app })
 
-// Start server
-const server = awsServerlessExpress.createServer(app)
-exports.serverlessHook = (event, context) => awsServerlessExpress.proxy(server, event, context)
+// export function serverlessHook(event, context) {
+//   const server = awsServerlessExpress.createServer(app)
+//   return awsServerlessExpress.proxy(server, event, context)()
+// }
+
+export function start(port) {
+  app.listen(port, () => console.log(`harmony running on port ${port}!`))
+}
+
+start(3000)
