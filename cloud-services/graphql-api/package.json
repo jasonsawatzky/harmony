@@ -11,9 +11,6 @@
   "dependencies": {
     "apollo-server-express": "^2.1.0",
     "connect": "^3.6.6",
-    "graphql": "^14.0.2",
-    "group-service": "file:../group-service",
-    "question": "file:../question",
-    "user-service": "file:../user-service"
+    "graphql": "^14.0.2"
   }
 }

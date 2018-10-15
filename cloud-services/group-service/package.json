@@ -10,8 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "mongoose": "^5.3.3",
-    "service-components": "file:../service-components",
-    "user-service": "file:../user-service"
+    "mongoose": "^5.3.3"
   }
 }
