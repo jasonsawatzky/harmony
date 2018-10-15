@@ -2,7 +2,7 @@
   "name": "express-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "express.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,13 +10,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babel-plugin-syntax-function-bind": "^6.13.0",
-    "babel-plugin-transform-function-bind": "^6.22.0",
+    "aws-serverless-express": "^3.3.5",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "deployment-config": "file:../../deployment-config",
+    "express": "^4.16.4",
     "graphql-api": "file:../graphql-api",
-    "mongoose": "^5.2.7",
-    "user-service": "file:../group-service"
+    "mongo": "^0.1.0",
+    "mongodb": "^3.1.8",
+    "mongoose": "^5.3.3"
   },
-  "devDependencies": {
-    "babel-preset-stage-0": "^6.24.1"
-  }
+  "devDependencies": {}
 }

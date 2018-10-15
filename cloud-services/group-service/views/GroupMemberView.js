@@ -36,9 +36,7 @@ export default class GroupMemberView extends Group {
     const Match = MatchModel(this.conn)
 
     const match = await this.match(group)
-    console.log("matchwith", match)
 
-    console.log(match, group.id(), this.id())
     if (!match) {
      Match.create({
        groups: [
@@ -76,10 +74,8 @@ export default class GroupMemberView extends Group {
    })
 
    const groupLists = matches.map(match => match.groups.map(groupId =>
-     GroupSuggestedView.init({ conn: this.conn, id: groupId })
+     GroupSuggestedView.init({ conn: this.conn, id: groupId, requester: this.id() })
    ))
-
-   console.log(groupLists)
 
    return groupLists
  }

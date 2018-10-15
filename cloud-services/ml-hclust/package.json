@@ -33,17 +33,10 @@
     "url": "https://github.com/mljs/hclust/issues"
   },
   "homepage": "https://github.com/mljs/hclust",
-  "devDependencies": {
-    "eslint": "^3.16.0",
-    "eslint-config-cheminfo": "^1.6.0",
-    "eslint-plugin-no-only-tests": "^1.1.0",
-    "mocha": "^3.0.2",
-    "mocha-better-spec-reporter": "^3.0.2",
-    "should": "^11.1.0"
-  },
+  "devDependencies": {},
   "dependencies": {
     "heap": "^0.2.6",
-    "ml-distance-euclidean": "^1.0.0",
+    "ml-distance-euclidean": "^2.0.0",
     "ml-distance-matrix": "^1.0.0"
   }
 }

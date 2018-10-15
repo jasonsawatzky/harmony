@@ -11,7 +11,7 @@ const userInputSchema = `
 	confirmPassword: String
 `
 
-export default makeExecutableSchema({ typeDefs: `
+export default `
 	type Query {
 		currentUser: User
 		session(username: String!, password: String!): String
@@ -71,4 +71,4 @@ export default makeExecutableSchema({ typeDefs: `
 	input UserInput {
 		${userInputSchema}
 	}
-`})
+`

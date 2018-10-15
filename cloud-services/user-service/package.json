@@ -9,8 +9,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "amazon-cognito-identity-js": "^3.0.2",
+    "aws-sdk": "^2.334.0",
+    "bcryptjs": "^2.4.3",
+    "deployment-config": "file:../../deployment-config",
     "group-service": "file:../group-service",
-    "ml-hclust": "^1.3.0",
+    "mongoose": "^5.3.3",
     "question": "file:../question",
     "service-components": "file:../service-components"
   }
