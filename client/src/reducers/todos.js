@@ -22,11 +22,11 @@ export default (todos = initialTodos, action) => {
 				}
 			]
 		case Actions.TOGGLE_TODO:
-			return todos.map(todo =>(
+			return todos.map(todo =>
 				todo.id === action.id
 					? { ...todo, completed: !todo.completed }
 					: todo
-			))
+			)
 		default:
 			return todos
 	}
