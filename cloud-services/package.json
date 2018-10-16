@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
+    "apollo-server-express": "^2.1.0",
     "deployment-config": "file:deployment-config",
     "express-server": "file:express-server",
     "graphql": "^14.0.2",

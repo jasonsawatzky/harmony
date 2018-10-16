@@ -17,7 +17,12 @@ export default `
 		session(username: String!, password: String!): String
 	}
 	type User {
-		${userInputSchema}
+		id: ID
+		firstName: String
+		lastName: String
+		username: String
+		email: String
+		birthdate: String
 		groups: [Group]
 		group(id: ID): Group
 		createGroup(description: String): String
