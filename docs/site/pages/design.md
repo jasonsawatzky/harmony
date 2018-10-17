@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Design
-permalink: design
+permalink: design.html
 ---
 
 # Design

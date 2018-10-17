@@ -44,7 +44,7 @@ export default class User extends AbstractView {
    try {
      const cogUser = await cognito.signUp(input)
      const id = cogUser.UserSub.slice(0,12)
-     const dao = Dao.createDocument(conn, UserModels, input, id)
+     const dao = await Dao.createDocument(conn, UserModels, input, id)
      return new this({ conn, dao })
    }
    catch(e) {
@@ -101,6 +101,7 @@ export default class User extends AbstractView {
   }
 
   async group(id) {
+    //TODO Check group membership
     return (await this.groups()).find(async group => await (await group).id() === id)
   }
 

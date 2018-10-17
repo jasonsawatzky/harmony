@@ -17,6 +17,7 @@
     "apollo-server-express": "^2.1.0",
     "deployment-config": "file:deployment-config",
     "express-server": "file:express-server",
+    "forever": "^0.15.3",
     "graphql": "^14.0.2",
     "graphql-api": "file:graphql-api",
     "group-service": "file:group-service",

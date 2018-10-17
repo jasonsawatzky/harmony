@@ -71,7 +71,7 @@ export default `
 	}
 
 	type Mutation {
-		createUser(user: UserInput): String
+		createUser(user: UserInput): User
 	}
 	input UserInput {
 		${userInputSchema}
