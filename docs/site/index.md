@@ -1,3 +1,7 @@
+---
+layout: page
+---
+
 # Harmony
 ## Components
 1. Cloud Services

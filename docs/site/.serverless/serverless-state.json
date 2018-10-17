@@ -1,0 +1,81 @@
+{
+  "service": {
+    "service": "harmony-documentation-site",
+    "serviceObject": {
+      "name": "harmony-documentation-site"
+    },
+    "provider": {
+      "stage": "dev",
+      "region": "us-east-1",
+      "variableSyntax": "\\${([ ~:a-zA-Z0-9._'\",\\-\\/\\(\\)]+?)}",
+      "name": "aws",
+      "runtime": "nodejs8.10",
+      "versionFunctions": true,
+      "remoteFunctionData": null,
+      "compiledCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "ServerlessDeploymentBucket": {
+            "Type": "AWS::S3::Bucket"
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": {
+              "Ref": "ServerlessDeploymentBucket"
+            }
+          }
+        }
+      },
+      "coreCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "ServerlessDeploymentBucket": {
+            "Type": "AWS::S3::Bucket"
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": {
+              "Ref": "ServerlessDeploymentBucket"
+            }
+          }
+        }
+      }
+    },
+    "custom": {
+      "s3Sync": [
+        {
+          "bucketName": "harmony-client",
+          "localDir": "_site",
+          "acl": "public-read",
+          "followSymlinks": true,
+          "defaultContentType": "text/html",
+          "params": [
+            {
+              "index.html": {
+                "CacheControl": "no-cache"
+              }
+            },
+            {
+              "*.js": {
+                "CacheControl": "public, max-age=31536000"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "plugins": [
+      "serverless-s3-sync"
+    ],
+    "pluginsData": {},
+    "functions": {}
+  },
+  "package": {
+    "artifactDirectoryName": "serverless/harmony-documentation-site/dev/1539761210268-2018-10-17T07:26:50.268Z",
+    "artifact": ""
+  }
+}

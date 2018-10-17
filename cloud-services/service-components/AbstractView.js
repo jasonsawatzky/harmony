@@ -12,7 +12,7 @@ export default class AbstractView {
   }
 
   id() {
-    return this.dao.id
+    return JSON.parse(JSON.stringify(this.dao.id))
   }
 
   static init({ conn, id, dao }) {

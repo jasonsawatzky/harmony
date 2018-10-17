@@ -7,7 +7,7 @@ export default {
 		currentUser: (_, __, context) => !context.auth.id ?
 			Error(context.auth.status) :
 			User.init({ conn: context.conn, id: context.auth.id }),
-		session: (_, creds) => User.getSession(creds),
+		session: (_, creds) => User.getSession(creds)
 	},
 	Mutation: {
 		createUser: (_, { user }, context) => User.create(context.conn, user),

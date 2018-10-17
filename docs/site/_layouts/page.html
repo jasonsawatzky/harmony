@@ -1,0 +1,15 @@
+---
+layout: default
+---
+
+<article {% if page.feature-img %}class="feature-image"{% endif %} style="padding: 2% 20%;"">
+  <section class="post-content">
+  {% if page.bootstrap %}
+  <div class="bootstrap-iso">
+  {% endif %}
+	{{ content }}
+  {% if page.bootstrap %}
+  </div>
+  {% endif %}
+  </section>
+</article>

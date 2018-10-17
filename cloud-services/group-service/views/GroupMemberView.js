@@ -2,6 +2,7 @@ import Group from './Group'
 import GroupSuggestedView from './GroupSuggestedView'
 import { agnes, Cluster, ClusterLeaf } from '../../ml-hclust'
 import MatchModel from '../match-model'
+const undefRating = 3
 
 export default class GroupMemberView extends Group {
   static init({ conn, id, dao, Models, requester }) {

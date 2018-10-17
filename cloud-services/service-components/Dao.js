@@ -74,10 +74,10 @@ export default class Dao {
     const models = Models(conn)
 
     return models.find({
-      indexName: {
+      [indexName]: {
         $in: [id]
       }
-    })
+    }).exec()
   }
 
   async getListElement(list, index, id) {

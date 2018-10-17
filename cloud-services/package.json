@@ -6,8 +6,9 @@
   "scripts": {
     "sls-offline": "node node_modules/serverless/bin/serverless offline start --skipCacheInvalidation --dontPrintOutput --stage",
     "sls": "node node_modules/serverless/bin/serverless",
+    "start": "node dist/main.js",
     "build": "node node_modules/webpack/bin/webpack.js",
-    "start": "node dist/main.js"
+    "prestart": "node node_modules/webpack/bin/webpack.js"
   },
   "author": "",
   "license": "ISC",
