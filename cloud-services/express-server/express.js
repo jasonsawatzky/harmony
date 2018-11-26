@@ -42,8 +42,13 @@ graphqlApiExpress.applyMiddleware({ app })
 //   return awsServerlessExpress.proxy(server, event, context)()
 // }
 
+
+// Start server
+const server = awsServerlessExpress.createServer(app)
+exports.serverlessHook = (event, context) => {
+  return awsServerlessExpress.proxy(server, event, context)
+}
+
 export function start(port) {
   app.listen(port, () => console.log(`harmony running on port ${port}!`))
 }
-
-start(3000)

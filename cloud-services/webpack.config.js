@@ -1,12 +1,9 @@
 const slsw = require("serverless-webpack");
 const nodeExternals = require("webpack-node-externals");
+const entry = Object.assign(slsw.lib.entries, { babel: '@babel/polyfill' })
 
 module.exports = {
-  // entry: {
-  //   '@babel/polyfill': '@babel/polyfill',
-  //   'express-server/express': './express-server/express.js'
-  // },
-  entry: ['@babel/polyfill', './express-server/express.js'],
+  entry,
   target: "node",
   // Generate sourcemaps for proper error messages
   devtool: 'source-map',

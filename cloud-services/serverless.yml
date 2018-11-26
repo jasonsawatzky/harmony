@@ -16,8 +16,8 @@ custom:
     includeModules: true
 
 functions:
-  status:
-    handler: ./express-server/express.serverlessHook
+  graphql:
+    handler: express-server/express.serverlessHook
     events:
       - http: ANY /
       - http: 'ANY {proxy+}'

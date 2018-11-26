@@ -1,6 +1,8 @@
-
 {
   "stage": "",
+  "deploymentConfig": {
+    "s3BucketName": ""
+  },
   "mongo": {
     "userName": "",
     "password": "",
@@ -8,12 +10,16 @@
     "port": "",
     "dbName": ""
   },
-  
-  "client" :{
-    "apiUrl": ""
+  "client": {
+    "apiUrl": "",
+    "clientUrl": ""
   },
-
   "cognito": {
-    "url": ""
+    "url": "",
+    "userPoolId": "",
+    "clientId": "",
+    "region": "",
+    "pems": {},
+    "iss": ""
   }
 }
