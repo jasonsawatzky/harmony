@@ -11,8 +11,10 @@
     "ActiveGroup",
     "SuggestedGroup",
     "SuggestedUser",
+    "Match",
     "MatchedGroup",
     "MatchedUser",
+    "Message",
     "GroupMate"
   ]
 }

@@ -39,7 +39,7 @@ The current logged in user
 | birthdate | String |  |  |
 | groups | List< UserGroup > |  |  |
 | group | UserGroup | id: ID  |  |
-| createGroup | String | description: String  | Start a new Group |
+| createGroup | UserGroup | description: String  | Start a new Group |
 | details | UserDetails |  |  |
 | setInstagramLink | String | value: String  |  |
 | createQuestion | Question | text: String , answers: List< String >  | Register a new Question for Users to answer |
@@ -113,7 +113,8 @@ A Group with which the CurrentUser is currently searching for housemates
 | addMembers | String | members: List< String >  |  |
 | suggestion | SuggestedGroup |  | Request a new Group with high compatibility with this ActiveGroup |
 | suggested | SuggestedGroup | id: ID  | Get the specified previously suggested Group |
-| matches | List< null > |  | Groups with whom this Group has mutually approved |
+| matches | List< Match > |  | Groups with whom this Group has mutually approved |
+| match | Match | id: ID  |  |
 
 ## Type SuggestedGroup 
 
@@ -136,6 +137,17 @@ A member of a Group which has been suggested for the CurrentUser's Active Group
 | id | ID |  |  |
 | firstName | String |  |  |
 
+## Type Match 
+
+A collection of Groups that have mutually approved of each other
+
+| Field | Type | Arguments | Description |
+|-------|------|-----------|-------------|
+| id | ID |  |  |
+| groups | List< MatchedGroup > |  |  |
+| conversation | List< Message > |  |  |
+| message | Message | text: String  |  |
+
 ## Type MatchedGroup 
 
 A Group with whom the ActiveGroup has mutually approved
@@ -156,6 +168,16 @@ A member of a Group with whom the CurrentUser has matched
 | firstName | String |  |  |
 | lastName | String |  |  |
 | details | UserDetails |  |  |
+
+## Type Message 
+
+A message from a user to a Match
+
+| Field | Type | Arguments | Description |
+|-------|------|-----------|-------------|
+| sender | MatchedUser |  |  |
+| text | String |  |  |
+| time | Date |  |  |
 
 ## Type GroupMate implements GroupMember 
 
