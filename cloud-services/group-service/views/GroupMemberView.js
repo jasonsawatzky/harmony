@@ -1,7 +1,9 @@
 import Group from './Group'
 import GroupSuggestedView from './GroupSuggestedView'
+import Match from './Match'
 import { agnes, Cluster, ClusterLeaf } from '../../ml-hclust'
 import MatchModel from '../match-model'
+import { getMatchByGroup } from 'group-service'
 const undefRating = 3
 
 export default class GroupMemberView extends Group {
@@ -36,49 +38,31 @@ export default class GroupMemberView extends Group {
   async matchWith(group) {
     const Match = MatchModel(this.conn)
 
-    const match = await this.match(group)
+    let match = await this.match(group)
+    match = 0
 
     if (!match) {
      Match.create({
        groups: [
          group.id(),
          this.id()
-       ]
+       ],
+       conversation: [],
+       time: new Date().toString()
      })
     }
   }
 
-  async match(group) {
-    const Match = MatchModel(this.conn)
-
-    const matches = await Match.find({
-     groups: {
-       $in: [group.id()],
-       $in: [this.id()]
-     }
-   })
-
-   if (matches.length > 0) {
-     return matches[0]
-   }
-
-   return null
+  async match(id) {
+    return Match.init({ conn: this.conn, id, requester: this.requester })
   }
 
   async matches() {
-    const Match = MatchModel(this.conn)
+   const daos = await getMatchByGroup(this.conn, this)
 
-    const matches = await Match.find({
-     groups: {
-       $in: [this.id()]
-     }
-   })
-
-   const groupLists = matches.map(match => match.groups.map(groupId =>
-     GroupSuggestedView.init({ conn: this.conn, id: groupId, requester: this.id() })
+   return await Promise.all(daos.map(async dao =>
+     Match.init({ conn: this.conn, dao })
    ))
-
-   return groupLists
  }
 
   async suggested(id) {

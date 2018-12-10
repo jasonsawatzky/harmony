@@ -70,10 +70,11 @@ export default {
 		creator: (group) => group.creator(),
 		members: (group) => group.members(),
 		description: (group) => group.description(),
-		addMembers: (group, { members }) => group.addMembers(memberIds),
+		addMembers: (group, { members }) => group.addMembers(members),
 		suggestion: (group) => group.suggestion(),
 		suggested: (group, { id }) => group.suggested(id),
-		matches: (group) => group.matches()
+		matches: (group) => group.matches(),
+		match: (group, { id }) => group.match(id)
 	},
 	SuggestedGroup: {
 		id: (group) => group.id(),
@@ -86,6 +87,17 @@ export default {
 		id: (group) => group.id(),
 		members: (group) => group.members(),
 		description: (group) => group.description(),
+	},
+	Match: {
+		id: (match) => match.id(),
+		groups: (match) => match.groups(),
+		conversation: (match) => match.conversation(),
+		message: (match, { text }) => match.message(text),
+	},
+	Message: {
+		sender: (message) => message.sender(),
+		text: (message) => message.text(),
+		time: (message) => message.time(),
 	},
 	Question: {
 		id: (question) => question.id(),

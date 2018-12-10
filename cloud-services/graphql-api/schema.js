@@ -1,4 +1,6 @@
 export default `
+	scalar Date
+
 	type Query {
 		"Create a new User"
 		createUser(user: UserInput): CurrentUser
@@ -134,7 +136,8 @@ export default `
 			id: ID
 		): SuggestedGroup
 		"Groups with whom this Group has mutually approved"
-		matches: [[MatchedGroup]]
+		matches: [Match]
+		match(id: ID): Match
 	}
 
 	"A Group that has been suggested for the ActiveGroup"
@@ -155,12 +158,27 @@ export default `
 		description: String
 	}
 
+	"A collection of Groups that have mutually approved of each other"
+	type Match {
+		id: ID
+		groups: [MatchedGroup]
+		conversation: [Message]
+		message(text: String): Message
+	}
+
+	"A message from a user to a Match"
+	type Message {
+		sender: MatchedUser
+		text: String
+		time: Date
+	}
+
 	"A Question to be answered by Users"
 	type Question {
-		id: ID,
-		text: String,
+		id: ID
+		text: String
 		"The Question is required for all Users"
-		required: Boolean,
+		required: Boolean
 		answers: [Answer]
 	}
 

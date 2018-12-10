@@ -16,7 +16,7 @@ export default class Dao {
   }
 
   static init(...args) {
-    return new Dao(...args)
+    return new this(...args)
   }
 
   static ObjectId(id) {
@@ -70,14 +70,32 @@ export default class Dao {
     })
   }
 
-  static async getByIndexList(conn, Models, indexName, id) {
+  static async getByIndexList(conn, Models, indexName, object) {
     const models = Models(conn)
 
-    return models.find({
+    return (await models.find({
       [indexName]: {
-        $in: [id]
+        $in: [await object.id()]
       }
-    }).exec()
+    }).exec())
+    .map(model =>
+      Dao.init(conn, { model: model, Model: Models })
+    )
+  }
+
+  // TODO This needs to be generalized with the preceding method
+  static async getByIndexListBoth(conn, Models, indexName, object1, object2) {
+    const models = Models(conn)
+
+    return (await models.find({
+      [indexName]: {
+        $in: [await object1.id()],
+        $in: [await object2.id()]
+      }
+    }).exec())
+    .map(model =>
+      Dao.init(conn, { model: model, Model: Models })
+    )
   }
 
   async getListElement(list, index, id) {

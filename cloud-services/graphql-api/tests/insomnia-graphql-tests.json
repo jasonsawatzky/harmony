@@ -1,7 +1,7 @@
 {
 	"_type": "export",
 	"__export_format": 3,
-	"__export_date": "2018-12-10T02:51:54.246Z",
+	"__export_date": "2018-12-10T08:26:21.045Z",
 	"__export_source": "insomnia.desktop.app:v6.2.3",
 	"resources": [
 		{
@@ -59,7 +59,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1532668455648,
 			"method": "POST",
-			"modified": 1544409283311,
+			"modified": 1544428440133,
 			"name": "Log In Client as jasons",
 			"parameters": [],
 			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
@@ -96,7 +96,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1532747889938,
 			"method": "POST",
-			"modified": 1544403796905,
+			"modified": 1544426754468,
 			"name": "Get CurrentUser",
 			"parameters": [],
 			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
@@ -128,7 +128,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1533626806769,
 			"method": "POST",
-			"modified": 1544403296225,
+			"modified": 1544426621714,
 			"name": "Sign Up jasons",
 			"parameters": [],
 			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
@@ -165,7 +165,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1533795010381,
 			"method": "POST",
-			"modified": 1544409389606,
+			"modified": 1544426622237,
 			"name": "Get CurrentUser Groups",
 			"parameters": [],
 			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
@@ -858,7 +858,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1536550297709.375,
 			"method": "POST",
-			"modified": 1544409331318,
+			"modified": 1544425800545,
 			"name": "Like Group",
 			"parameters": [],
 			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
@@ -913,7 +913,7 @@
 			"authentication": {},
 			"body": {
 				"mimeType": "application/graphql",
-				"text": "{\"query\":\"{\\n\\tcurrentUser {\\n\\t\\tactiveGroup {\\n\\t\\t\\tmatches {\\n\\t\\t\\t\\tdescription\\n\\t\\t\\t}\\n\\t\\t}\\n\\t}\\n}\"}"
+				"text": "{\"query\":\"{\\n\\tcurrentUser {\\n\\t\\tactiveGroup {\\n\\t\\t\\tmatches {\\n        conversation {\\n          text\\n        }\\n\\t\\t\\t}\\n\\t\\t}\\n\\t}\\n}\"}"
 			},
 			"created": 1539147490689,
 			"description": "",
@@ -932,7 +932,7 @@
 			"isPrivate": false,
 			"metaSortKey": -1537584347156.5,
 			"method": "POST",
-			"modified": 1544410199956,
+			"modified": 1544430357569,
 			"name": "Get Matches",
 			"parameters": [],
 			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
@@ -1008,6 +1008,43 @@
 			"method": "POST",
 			"modified": 1544409304192,
 			"name": "Get Suggested",
+			"parameters": [],
+			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "{{url}}",
+			"_type": "request"
+		},
+		{
+			"_id": "req_9616afac7f4a45edbe8c3384e0f0da6c",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/graphql",
+				"text": "{\"query\":\"{\\n\\tcurrentUser {\\n\\t\\tactiveGroup {\\n\\t\\t\\tmatches {\\n        id,\\n        conversation {\\n          text\\n        }\\n      },\\n      match(id: \\\"5c0e12ecc1837946fceddfe7\\\") {\\n        message(text: \\\"NEW PAYLOAD\\\") {\\n          text\\n        }\\n      }\\n    },\\n\\t}\\n}\"}"
+			},
+			"created": 1544410479389,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_8d07795873a149eeabd73d88bc5d5f28",
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_72e663ad5f4b4e0981d15011b4d490da",
+					"name": "X-Access-Token",
+					"value": "{{auth}}"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1537584347131.5,
+			"method": "POST",
+			"modified": 1544430360945,
+			"name": "Message Match",
 			"parameters": [],
 			"parentId": "wrk_bb6ad500cb23498682ac038a6f70f16d",
 			"settingDisableRenderRequestBody": false,

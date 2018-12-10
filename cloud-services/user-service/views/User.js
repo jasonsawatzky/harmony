@@ -94,7 +94,7 @@ export default class User extends AbstractView {
 
   async groups() {
     const id = await this.id()
-    const daos = await getByMember(this.conn, id)
+    const daos = await getByMember(this.conn, this)
     const groups = daos.map(async dao => {
       const creator = await dao.get('creator')
       if (JSON.stringify(creator) === JSON.stringify(id)) {
