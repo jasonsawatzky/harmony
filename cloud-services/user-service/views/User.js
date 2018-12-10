@@ -21,7 +21,8 @@ export default class User extends AbstractView {
   }
 
   async setActiveGroup(id) {
-    const groups = (await this.groups()).map(group => group.id())
+
+    // const groups = (await this.groups()).map(group => group.id())
 
     // Enable after fixing User.groups
     // if (!(id in groups)) {
@@ -32,8 +33,12 @@ export default class User extends AbstractView {
     return id
   }
 
-  static getSession(credentials) {
-    return cognito.signIn(credentials)
+  static auth(credentials) {
+    return cognito.token(credentials)
+  }
+
+  static async initAuth(conn, credentials) {
+    return this.init({ conn: conn, id: await cognito.userId(credentials), type: 'CurrentUser' })
   }
 
   static async getAll(conn) {
@@ -74,6 +79,9 @@ export default class User extends AbstractView {
 
   async details() {
     const details = await this.dao.get('details')
+
+    if (!details) return
+
     const output = {}
     details.forEach((value, name) => output[name] = value)
 

@@ -1,0 +1,18 @@
+{
+  "types": [
+    "Query",
+    "UserInput",
+    "CurrentUser",
+    "GroupMember",
+    "UserDetails",
+    "UserGroup",
+    "Question",
+    "Answer",
+    "ActiveGroup",
+    "SuggestedGroup",
+    "SuggestedUser",
+    "MatchedGroup",
+    "MatchedUser",
+    "GroupMate"
+  ]
+}

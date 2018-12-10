@@ -49,7 +49,7 @@ export async function signUp(user) {
   }
 }
 
-export async function signIn(credentials) {
+async function verifyCredentials(credentials) {
   const authenticationData = {
       Username : credentials.username,
       Password : credentials.password,
@@ -75,10 +75,20 @@ export async function signIn(credentials) {
     })
 
     try {
-      const res = await authenticateUser;
-      return res.idToken.jwtToken
+      return await authenticateUser;
     }
     catch(e) {
-      console.log(`Cognito: Error signing user in:`, e)
+      console.log(`Cognito: Error verifying User credentials:`, e)
     }
+}
+
+export async function token(credentials) {
+  return (await verifyCredentials(credentials)).idToken.jwtToken
+}
+
+export async function userId(credentials) {
+  const subscriberId = (await verifyCredentials(credentials)).idToken.payload.sub
+  return subscriberId.slice(0,12) // Trim the cognito UserSub to a 12 character ID
+
+  return (await verifyCredentials(credentials))
 }

@@ -2,7 +2,6 @@ import { ApolloServer, gql } from 'apollo-server-express'
 import { mergeSchemas } from 'graphql-tools'
 import schema from './schema'
 import resolvers from './resolvers'
-import connect from 'connect'
 
 /*
 ** Express middleware for GraphQL

@@ -1,7 +1,6 @@
 import {promisify} from 'util'
 import jwt from 'jsonwebtoken'
 import{cognito as cognitoConfig} from 'deployment-config'
-import { ObjectId } from 'mongodb'
 
 // https://aws.amazon.com/blogs/mobile/integrating-amazon-cognito-user-pools-with-api-gateway/
 
@@ -43,7 +42,7 @@ export async function authenticateToken(token) {
       const verifyToken =  promisify(jwt.verify)
       const auth = await verifyToken(token, cognitoConfig.pems[decodedJwt.header.kid], { issuer: decodedJwt.payload.iss })
 
-      auth.id = ObjectId(auth.sub.slice(0,12)) // Trim the cognito UserSub to a 12 character ID
+      auth.id = auth.sub.slice(0,12) // Trim the cognito UserSub to a 12 character ID
       auth.status = 'Verified'
       return auth
     }

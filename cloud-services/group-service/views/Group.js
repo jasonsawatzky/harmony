@@ -26,13 +26,13 @@ export default class Group extends AbstractView {
   }
 
   async creator() {
-    return User.init({ conn: this.conn, id: (await this.dao.get('creator')) })
+    return UserGroupmateView.init({ conn: this.conn, id: (await this.dao.get('creator')), type: 'GroupMate' })
   }
 
   async members() {
     const memberIds = await this.dao.get('members')
     return memberIds.map(userId =>
-      UserGroupmateView.init({ conn: this.conn, id: userId })
+      UserGroupmateView.init({ conn: this.conn, id: userId, type: 'GroupMate' })
     )
   }
 

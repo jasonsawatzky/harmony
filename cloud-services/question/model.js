@@ -22,7 +22,6 @@ export default function(conn) {
 		},
 		required: {
 			type: Boolean,
-			required: true
 		},
 		answers: [answerSchema]
 	})

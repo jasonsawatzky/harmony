@@ -15,7 +15,13 @@ export default class AbstractView {
     return JSON.parse(JSON.stringify(this.dao.id))
   }
 
-  static init({ conn, id, dao }) {
-   return new this({ conn, id, dao })
+  gqlType() {
+    return this.type
+  }
+
+  static init({ conn, id, dao, type }) {
+   const view =  new this({ conn, id, dao })
+   view.type = type
+   return view
   }
 }
