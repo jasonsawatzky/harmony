@@ -16,8 +16,8 @@ export default class Group extends AbstractView {
     return (await Dao.getAll(conn, GroupModel)).map(dao => new this({ conn, dao }))
   }
 
-  static create(conn, creator, description) {
-   const dao = Dao.createDocument(conn, GroupModel, {
+  static async create(conn, creator, description) {
+   const dao = await  Dao.createDocument(conn, GroupModel, {
      creator: creator,
      members: [creator],
      description: description

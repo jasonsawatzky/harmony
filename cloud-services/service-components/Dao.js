@@ -123,6 +123,7 @@ export default class Dao {
     })
     if (!found) {
       elements.push(newItem)
+      model.save()
     }
 
     return found || newItem

@@ -1,6 +1,7 @@
 import { AbstractView, Dao } from 'service-components'
 import MatchModel from '../match-model'
 import Message from './Message'
+import GroupMemberView from './GroupMemberView'
 
 let dao
 let conn
@@ -27,5 +28,11 @@ export default class Match extends AbstractView {
     }
     await this.dao.set('conversation', messages => messages.push(message))
     return new Message({ text })
+  }
+
+  async groups() {
+    const groups = await this.dao.get('groups')
+
+    return !groups ? [] : groups.map(id => GroupMemberView.init({ conn: this.conn, id }))
   }
 }

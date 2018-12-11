@@ -122,8 +122,14 @@ export default class GroupMemberView extends Group {
 
     const path = await cluster.findPath(async cluster =>
       !(cluster instanceof ClusterLeaf) && cluster.value && equals(await cluster.value.id(), id))
+
     if (path.length > 2) {
-      const res = path[1].children[1].value
+      let res = path[1].children[0].value
+
+      if (this.dao.equals(res.id(), this.dao.constructor.ObjectId(this.id()))) {
+        res = path[1].children[1].value
+      }
+
       this.addSuggested(res.id())
       return res
     }

@@ -16,8 +16,8 @@ export default class User extends AbstractView {
   }
 
   async activeGroup() {
-    const group = JSON.parse(JSON.stringify(await this.dao.get('activeGroup')))
-    return group ? GroupMemberView.init({ conn: this.conn, id: group, requester: this }) : Error('User has no active group')
+    const activeGroup = await this.dao.get('activeGroup')
+    return activeGroup ? GroupMemberView.init({ conn: this.conn, id: activeGroup, requester: this }) : null
   }
 
   async setActiveGroup(id) {
@@ -28,9 +28,13 @@ export default class User extends AbstractView {
     // if (!(id in groups)) {
     //   return Error('User is not a member of this group')
     // }
-    this.dao.set('activeGroup', null, id)
+    try {
+      await this.dao.set('activeGroup', null, id)
+      return 'Succesfully set ActiveGroup'
+    }
+    catch (e) {
 
-    return id
+    }
   }
 
   static auth(credentials) {
@@ -119,11 +123,11 @@ export default class User extends AbstractView {
 
   async comparisonPoint(id) {
     return (await this.dao.get('comparisonPoints')).find(point =>
-      JSON.stringify(point.question) === JSON.stringify(id))
+      this.dao.constructor.equals(point.question, id))
   }
 
-  answerQuestion(id, choice) {
-      this.dao.updateListElement(
+  async answerQuestion(id, choice) {
+      await this.dao.updateListElement(
         'comparisonPoints',
         'question',
         id,
@@ -133,28 +137,38 @@ export default class User extends AbstractView {
           choice
         }
       )
+
+      return "Successfully answered Question"
   }
 
-  rateAnswer(question, answer, rating) {
-    this.dao.updateListElement(
-      'comparisonPoints',
-      'question',
-      question,
-      point => this.updateListItem(
-        point.answerRatings,
-        'answer',
-        answer,
-        answerRating => answerRating.rating = rating,
-        {
+  async rateAnswer(question, answer, rating) {
+    try {
+      const model = await this.dao.model()
+
+      if (!model.comparisonPoints) model.comparisonPoints = []
+
+      const cp = model.comparisonPoints.find(cp => this.dao.equals(cp.question, question))
+
+      if(!cp.answerRatings) cp.answerRatings = []
+
+      const answerRating = cp.answerRatings.find(ans => this.dao.equals(ans.answer, answer))
+
+      if (!answerRating) {
+        cp.answerRatings.push({
           answer,
           rating
-        }
-      ),
-      {
-        question,
-        answerRatings: []
+        })
       }
-    )
+      else {
+        answerRating.rating = rating
+      }
+
+      await model.save()
+      return 'Succesfully rated Answer'
+    }
+    catch(e) {
+      return 'Error rating answer: ' + e
+    }
   }
 
   async comparisonPoints() {
