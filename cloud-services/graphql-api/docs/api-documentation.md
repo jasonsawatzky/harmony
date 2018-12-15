@@ -1,5 +1,5 @@
 
-## Type Query 
+## Type Query
 
 
 
@@ -25,7 +25,18 @@ Required information to register a new user
   | password | String | Password with at least one capital letter, number, and special character |
   | confirmPassword | String | Confirm the password |
 
-## Type CurrentUser implements GroupMember 
+## Interface GroupMember
+
+The CurrentUser or a Groupmate
+
+| Field | Type | Arguments | Description |
+|-------|------|-----------|-------------|
+| id | ID |  |  |
+| firstName | String |  |  |
+| lastName | String |  |  |
+| details | UserDetails |  |  |
+
+## Type CurrentUser implements GroupMember
 
 The current logged in user
 
@@ -48,9 +59,9 @@ The current logged in user
 | activeGroup | ActiveGroup |  | The Group in which the CurrentUser is currently searching for housemates |
 | setActiveGroup | String | id: ID  | Select the Group with which to search |
 
-## Interface GroupMember
+## Type GroupMate implements GroupMember
 
-The CurrentUser or a Groupmate
+A fellow member of a Group
 
 | Field | Type | Arguments | Description |
 |-------|------|-----------|-------------|
@@ -59,7 +70,27 @@ The CurrentUser or a Groupmate
 | lastName | String |  |  |
 | details | UserDetails |  |  |
 
-## Type UserDetails 
+## Type SuggestedUser
+
+A member of a Group which has been suggested for the CurrentUser's Active Group
+
+| Field | Type | Arguments | Description |
+|-------|------|-----------|-------------|
+| id | ID |  |  |
+| firstName | String |  |  |
+
+## Type MatchedUser
+
+A member of a Group with whom the CurrentUser has matched
+
+| Field | Type | Arguments | Description |
+|-------|------|-----------|-------------|
+| id | ID |  |  |
+| firstName | String |  |  |
+| lastName | String |  |  |
+| details | UserDetails |  |  |
+
+## Type UserDetails
 
 Information visible to GroupMates and MatchedUsers, but not SuggestedUsers
 
@@ -67,7 +98,7 @@ Information visible to GroupMates and MatchedUsers, but not SuggestedUsers
 |-------|------|-----------|-------------|
 | instagramLink | String |  | URL of the user's instagram profile |
 
-## Type UserGroup 
+## Type UserGroup
 
 A Group for which the Current User is a member
 
@@ -79,28 +110,7 @@ A Group for which the Current User is a member
 | description | String |  |  |
 | addMembers | String | members: List< String >  |  |
 
-## Type Question 
-
-A Question to be answered by Users
-
-| Field | Type | Arguments | Description |
-|-------|------|-----------|-------------|
-| id | ID |  |  |
-| text | String |  |  |
-| required | Boolean |  | The Question is required for all Users |
-| answers | List< Answer > |  |  |
-
-## Type Answer 
-
-
-
-| Field | Type | Arguments | Description |
-|-------|------|-----------|-------------|
-| id | ID |  |  |
-| text | String |  |  |
-| rating | Int |  | 0: Unacceptable, 1-5: Preference Rating |
-
-## Type ActiveGroup 
+## Type ActiveGroup
 
 A Group with which the CurrentUser is currently searching for housemates
 
@@ -116,7 +126,7 @@ A Group with which the CurrentUser is currently searching for housemates
 | matches | List< Match > |  | Groups with whom this Group has mutually approved |
 | match | Match | id: ID  |  |
 
-## Type SuggestedGroup 
+## Type SuggestedGroup
 
 A Group that has been suggested for the ActiveGroup
 
@@ -128,16 +138,38 @@ A Group that has been suggested for the ActiveGroup
 | like | String |  | Register the CurrentUser's approval of this Group |
 | dislike | String |  | Register the CurrentUser's disapproval of this Group |
 
-## Type SuggestedUser 
+## Type MatchedGroup
 
-A member of a Group which has been suggested for the CurrentUser's Active Group
+A Group with whom the ActiveGroup has mutually approved
 
 | Field | Type | Arguments | Description |
 |-------|------|-----------|-------------|
 | id | ID |  |  |
-| firstName | String |  |  |
+| members | List< MatchedUser > |  |  |
+| description | String |  |  |
 
-## Type Match 
+## Type Question
+
+A Question to be answered by Users
+
+| Field | Type | Arguments | Description |
+|-------|------|-----------|-------------|
+| id | ID |  |  |
+| text | String |  |  |
+| required | Boolean |  | The Question is required for all Users |
+| answers | List< Answer > |  |  |
+
+## Type Answer
+
+
+
+| Field | Type | Arguments | Description |
+|-------|------|-----------|-------------|
+| id | ID |  |  |
+| text | String |  |  |
+| rating | Int |  | 0: Unacceptable, 1-5: Preference Rating |
+
+## Type Match
 
 A collection of Groups that have mutually approved of each other
 
@@ -148,28 +180,7 @@ A collection of Groups that have mutually approved of each other
 | conversation | List< Message > |  |  |
 | message | Message | text: String  |  |
 
-## Type MatchedGroup 
-
-A Group with whom the ActiveGroup has mutually approved
-
-| Field | Type | Arguments | Description |
-|-------|------|-----------|-------------|
-| id | ID |  |  |
-| members | List< MatchedUser > |  |  |
-| description | String |  |  |
-
-## Type MatchedUser 
-
-A member of a Group with whom the CurrentUser has matched
-
-| Field | Type | Arguments | Description |
-|-------|------|-----------|-------------|
-| id | ID |  |  |
-| firstName | String |  |  |
-| lastName | String |  |  |
-| details | UserDetails |  |  |
-
-## Type Message 
+## Type Message
 
 A message from a user to a Match
 
@@ -178,14 +189,3 @@ A message from a user to a Match
 | sender | MatchedUser |  |  |
 | text | String |  |  |
 | time | Date |  |  |
-
-## Type GroupMate implements GroupMember 
-
-A fellow member of a Group
-
-| Field | Type | Arguments | Description |
-|-------|------|-----------|-------------|
-| id | ID |  |  |
-| firstName | String |  |  |
-| lastName | String |  |  |
-| details | UserDetails |  |  |

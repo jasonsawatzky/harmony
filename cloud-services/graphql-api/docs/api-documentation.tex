@@ -1,0 +1,309 @@
+\hypertarget{type-query}{%
+\subsection{Type Query}\label{type-query}}
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+Field & Type & Arguments & Description\tabularnewline
+\midrule
+\endhead
+createUser & CurrentUser & user: UserInput & Create a new
+User\tabularnewline
+currentUser & CurrentUser & username: String , password: String
+&\tabularnewline
+auth & String & username: null , password: null & Obtain an
+authorization token for the specified User, Tokens are valid for 1
+hour\tabularnewline
+question & Question & id: ID &\tabularnewline
+questions & List\textless{} Question \textgreater{} & &\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{input-userinput}{%
+\subsection{Input UserInput}\label{input-userinput}}
+
+Required information to register a new user
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+Field & Type & Description\tabularnewline
+\midrule
+\endhead
+firstName & String &\tabularnewline
+lastName & String &\tabularnewline
+username & String & Unique username\tabularnewline
+email & String & Valid email\tabularnewline
+birthdate & String & User's date of birth, formatted as
+mm/dd/yyyy\tabularnewline
+password & String & Password with at least one capital letter, number,
+and special character\tabularnewline
+confirmPassword & String & Confirm the password\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{interface-groupmember}{%
+\subsection{Interface GroupMember}\label{interface-groupmember}}
+
+The CurrentUser or a Groupmate
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+Field & Type & Arguments & Description\tabularnewline
+\midrule
+\endhead
+id & ID & &\tabularnewline
+firstName & String & &\tabularnewline
+lastName & String & &\tabularnewline
+details & UserDetails & &\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{type-currentuser-implements-groupmember}{%
+\subsection{Type CurrentUser implements
+GroupMember}\label{type-currentuser-implements-groupmember}}
+
+The current logged in user
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+Field & Type & Arguments & Description\tabularnewline
+\midrule
+\endhead
+id & ID & &\tabularnewline
+firstName & String & &\tabularnewline
+lastName & String & &\tabularnewline
+username & String & &\tabularnewline
+email & String & &\tabularnewline
+birthdate & String & &\tabularnewline
+groups & List\textless{} UserGroup \textgreater{} & &\tabularnewline
+group & UserGroup & id: ID &\tabularnewline
+createGroup & UserGroup & description: String & Start a new
+Group\tabularnewline
+details & UserDetails & &\tabularnewline
+setInstagramLink & String & value: String &\tabularnewline
+createQuestion & Question & text: String , answers: List\textless{}
+String \textgreater{} & Register a new Question for Users to
+answer\tabularnewline
+answerQuestion & String & id: ID , choice: ID & Select an answer for a
+Question\tabularnewline
+rateAnswer & String & question: ID , answer: ID , rating: Int & Rate
+preference for the selected answer\tabularnewline
+activeGroup & ActiveGroup & & The Group in which the CurrentUser is
+currently searching for housemates\tabularnewline
+setActiveGroup & String & id: ID & Select the Group with which to
+search\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{type-groupmate-implements-groupmember}{%
+\subsection{Type GroupMate implements
+GroupMember}\label{type-groupmate-implements-groupmember}}
+
+A fellow member of a Group
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+Field & Type & Arguments & Description\tabularnewline
+\midrule
+\endhead
+id & ID & &\tabularnewline
+firstName & String & &\tabularnewline
+lastName & String & &\tabularnewline
+details & UserDetails & &\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{type-suggesteduser}{%
+\subsection{Type SuggestedUser}\label{type-suggesteduser}}
+
+A member of a Group which has been suggested for the CurrentUser's
+Active Group
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+Field & Type & Arguments & Description\tabularnewline
+\midrule
+\endhead
+id & ID & &\tabularnewline
+firstName & String & &\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{type-matcheduser}{%
+\subsection{Type MatchedUser}\label{type-matcheduser}}
+
+A member of a Group with whom the CurrentUser has matched
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+Field & Type & Arguments & Description\tabularnewline
+\midrule
+\endhead
+id & ID & &\tabularnewline
+firstName & String & &\tabularnewline
+lastName & String & &\tabularnewline
+details & UserDetails & &\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{type-userdetails}{%
+\subsection{Type UserDetails}\label{type-userdetails}}
+
+Information visible to GroupMates and MatchedUsers, but not
+SuggestedUsers
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+Field & Type & Arguments & Description\tabularnewline
+\midrule
+\endhead
+instagramLink & String & & URL of the user's instagram
+profile\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{type-usergroup}{%
+\subsection{Type UserGroup}\label{type-usergroup}}
+
+A Group for which the Current User is a member
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+Field & Type & Arguments & Description\tabularnewline
+\midrule
+\endhead
+id & ID & &\tabularnewline
+creator & GroupMember & &\tabularnewline
+members & List\textless{} GroupMember \textgreater{} & &\tabularnewline
+description & String & &\tabularnewline
+addMembers & String & members: List\textless{} String \textgreater{}
+&\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{type-activegroup}{%
+\subsection{Type ActiveGroup}\label{type-activegroup}}
+
+A Group with which the CurrentUser is currently searching for housemates
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+Field & Type & Arguments & Description\tabularnewline
+\midrule
+\endhead
+id & ID & &\tabularnewline
+creator & GroupMember & &\tabularnewline
+members & List\textless{} GroupMember \textgreater{} & &\tabularnewline
+description & String & &\tabularnewline
+addMembers & String & members: List\textless{} String \textgreater{}
+&\tabularnewline
+suggestion & SuggestedGroup & & Request a new Group with high
+compatibility with this ActiveGroup\tabularnewline
+suggested & SuggestedGroup & id: ID & Get the specified previously
+suggested Group\tabularnewline
+matches & List\textless{} Match \textgreater{} & & Groups with whom this
+Group has mutually approved\tabularnewline
+match & Match & id: ID &\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{type-suggestedgroup}{%
+\subsection{Type SuggestedGroup}\label{type-suggestedgroup}}
+
+A Group that has been suggested for the ActiveGroup
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+Field & Type & Arguments & Description\tabularnewline
+\midrule
+\endhead
+id & ID & &\tabularnewline
+members & List\textless{} SuggestedUser \textgreater{} &
+&\tabularnewline
+description & String & &\tabularnewline
+like & String & & Register the CurrentUser's approval of this
+Group\tabularnewline
+dislike & String & & Register the CurrentUser's disapproval of this
+Group\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{type-matchedgroup}{%
+\subsection{Type MatchedGroup}\label{type-matchedgroup}}
+
+A Group with whom the ActiveGroup has mutually approved
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+Field & Type & Arguments & Description\tabularnewline
+\midrule
+\endhead
+id & ID & &\tabularnewline
+members & List\textless{} MatchedUser \textgreater{} & &\tabularnewline
+description & String & &\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{type-question}{%
+\subsection{Type Question}\label{type-question}}
+
+A Question to be answered by Users
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+Field & Type & Arguments & Description\tabularnewline
+\midrule
+\endhead
+id & ID & &\tabularnewline
+text & String & &\tabularnewline
+required & Boolean & & The Question is required for all
+Users\tabularnewline
+answers & List\textless{} Answer \textgreater{} & &\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{type-answer}{%
+\subsection{Type Answer}\label{type-answer}}
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+Field & Type & Arguments & Description\tabularnewline
+\midrule
+\endhead
+id & ID & &\tabularnewline
+text & String & &\tabularnewline
+rating & Int & & 0: Unacceptable, 1-5: Preference Rating\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{type-match}{%
+\subsection{Type Match}\label{type-match}}
+
+A collection of Groups that have mutually approved of each other
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+Field & Type & Arguments & Description\tabularnewline
+\midrule
+\endhead
+id & ID & &\tabularnewline
+groups & List\textless{} MatchedGroup \textgreater{} & &\tabularnewline
+conversation & List\textless{} Message \textgreater{} & &\tabularnewline
+message & Message & text: String &\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{type-message}{%
+\subsection{Type Message}\label{type-message}}
+
+A message from a user to a Match
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+Field & Type & Arguments & Description\tabularnewline
+\midrule
+\endhead
+sender & MatchedUser & &\tabularnewline
+text & String & &\tabularnewline
+time & Date & &\tabularnewline
+\bottomrule
+\end{longtable}

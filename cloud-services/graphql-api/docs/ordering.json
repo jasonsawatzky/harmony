@@ -2,19 +2,19 @@
   "types": [
     "Query",
     "UserInput",
-    "CurrentUser",
     "GroupMember",
+    "CurrentUser",
+    "GroupMate",
+    "SuggestedUser",
+    "MatchedUser",
     "UserDetails",
     "UserGroup",
-    "Question",
-    "Answer",
     "ActiveGroup",
     "SuggestedGroup",
-    "SuggestedUser",
-    "Match",
     "MatchedGroup",
-    "MatchedUser",
-    "Message",
-    "GroupMate"
+    "Question",
+    "Answer",
+    "Match",
+    "Message"
   ]
 }
